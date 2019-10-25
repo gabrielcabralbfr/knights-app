@@ -6,6 +6,8 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var knightsRouter = require('./routes/knights');
 
+var mongoose = require('mongoose');
+
 var app = express();
 
 app.use(logger('dev'));
@@ -16,5 +18,31 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/knights', knightsRouter);
+
+
+mongoose.connect('mongodb://localhost:27017/test', { useNewUrlParser: true, useUnifiedTopology: true });
+
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  // we're connected!
+  console.log("CONNECTED TO MONGODB")
+
+});
+
+var { Knight } = require("./models/Knight")
+var me = new Knight(
+  {
+    "name": "",
+    "nickname": "",
+    "birthday": "1995/02/17",
+    "weapons": [{ "name": "sword", "mod": 3, "attr": "strength", "equipped": true }],
+    "attributes": { "strength": 0, "dexterity": 0, "constitution": 0, "intelligence": 0, "wisdom": 0, "charisma": 0 },
+    "keyAttribute": "strength"
+  }
+)
+
+console.log("ME", me.toJSON({ virtuals: true }))
+
 
 module.exports = app;
