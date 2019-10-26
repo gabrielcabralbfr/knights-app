@@ -39,6 +39,16 @@
                 "summary": "Find all knights",
                 "description": "Returns a list of Knights",
                 "operationId": "getAllKnights",
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "filter",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": false
+                    }
+                ],
                 "produces": [
                     "application/json"
                 ],
@@ -158,10 +168,44 @@
                     "type": "string"
                 },
                 "weapons": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "nickname": {
+                            "type": "integer"
+                        },
+                        "attr": {
+                            "type": "string"
+                        },
+                        "equipped": {
+                            "type": "boolean"
+                        }
+                    }
                 },
                 "attributes": {
-                    "type": "object"
+                    "type": "object",
+                    "properties": {
+                        "strength": {
+                            "type": "integer"
+                        },
+                        "dexterity": {
+                            "type": "integer"
+                        },
+                        "constitution": {
+                            "type": "integer"
+                        },
+                        "intelligence": {
+                            "type": "integer"
+                        },
+                        "wisdom": {
+                            "type": "integer"
+                        },
+                        "charisma": {
+                            "type": "integer"
+                        }
+                    }
                 },
                 "keyAttribute": {
                     "type": "string"

@@ -3,7 +3,6 @@ module.exports = {
     getAll: ({ res, query }) => {
         let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query 
         query.hallOfHeroes = false
-
         Knight.find(queryString, function (err, knights) {
             if (err) return res.send(err)
 
@@ -32,8 +31,6 @@ module.exports = {
         })
     },
     getById: ({ params, res }) => {
-        console.log(" AAAA", params);
-        
         Knight.findById(params.knightId, function (err, knight) {
             if (err) return res.status(400).send(err)
             res.send(knight)
