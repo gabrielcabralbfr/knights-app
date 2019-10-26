@@ -1,8 +1,10 @@
 const { Knight } = require("../models/Knight")
-const { Hero } = require("../models/Hero")
 module.exports = {
-    getAll: ({ res }) => {
-        Knight.find({}, function (err, knights) {
+    getAll: ({ res, query }) => {
+        let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query 
+        query.hallOfHeroes = false
+
+        Knight.find(queryString, function (err, knights) {
             if (err) return res.send(err)
 
             let knightsList = []
@@ -36,22 +38,10 @@ module.exports = {
         })
     },
     deleteById: ({ params, res }) => {
-        Knight.findById(params.knightId, function (err, knight) {
+        Knight.findOneAndUpdate({ _id: params.knightId }, { hallOfHeroes: true }, function (err, knight) {
             if (err) return res.status(400).send(err)
-            var hero = new Hero(knight)
-            console.log(hero);
-            
-            hero.save(function (err) {
-                if (err) return res.status(400).send(err)
-
-                Knight.deleteOne({ _id: params.knightId }, function (err, knight) {
-                    if (err) return res.status(400).send(err)
-                    res.send(knight)
-                })
-            })
-
+            res.send(knight)
         })
-
     },
     updateKnight: ({ params, res, body }) => {
         if (!body.nickname) res.status(400).send({ error: "Missing nickname property" })
