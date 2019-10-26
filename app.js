@@ -20,7 +20,7 @@ app.use('/', indexRouter);
 app.use('/knights', knightsRouter);
 
 
-mongoose.connect('mongodb://localhost:27017/knightdb', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true });
+mongoose.connect('mongodb+srv://mongouser:mongopassword@cluster0-m6uhf.mongodb.net/knightsdb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: true });
 
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
