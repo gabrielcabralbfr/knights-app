@@ -3,7 +3,6 @@ module.exports = {
     getAll: ({ res, query }) => {
         let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query 
         query.hallOfHeroes = false
-
         Knight.find(queryString, function (err, knights) {
             if (err) return res.send(err)
 
