@@ -2,16 +2,17 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var schemaOptions = {
     toObject: {
-      virtuals: true
+        virtuals: true
     },
     toJSON: {
-      virtuals: true
+        virtuals: true
     }
-  };
+};
 var knightSchema = new Schema({
     name: String,
     nickname: String,
     birthday: Date,
+    hallOfHeroes: { type: Boolean, default: false },
     weapons: [
         {
             name: String,
