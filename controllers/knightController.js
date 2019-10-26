@@ -1,7 +1,10 @@
 const { Knight } = require("../models/Knight")
 module.exports = {
-    getAll: ({ res }) => {
-        Knight.find({}, function (err, knights) {
+    getAll: ({ res, query }) => {
+        let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query 
+        query.hallOfHeroes = false
+
+        Knight.find(queryString, function (err, knights) {
             if (err) return res.send(err)
 
             let knightsList = []
@@ -37,7 +40,7 @@ module.exports = {
         })
     },
     deleteById: ({ params, res }) => {
-        Knight.deleteOne({ _id: params.knightId }, function (err, knight) {
+        Knight.findOneAndUpdate({ _id: params.knightId }, { hallOfHeroes: true }, function (err, knight) {
             if (err) return res.status(400).send(err)
             res.send(knight)
         })
