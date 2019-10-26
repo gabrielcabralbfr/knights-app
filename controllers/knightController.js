@@ -29,6 +29,8 @@ module.exports = {
         })
     },
     getById: ({ params, res }) => {
+        console.log(" AAAA", params);
+        
         Knight.findById(params.knightId, function (err, knight) {
             if (err) return res.status(400).send(err)
             res.send(knight)

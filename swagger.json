@@ -13,24 +13,25 @@
             "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
         }
     },
-    "host": "localhost",
+    "host": "localhost:3000",
+    "port": 3000,
     "basePath": "/",
     "tags": [
         {
             "name": "knight",
-            "description": "Operations about user",
+            "description": "Operations about Knight",
             "externalDocs": {
-                "description": "Find out more about our store",
-                "url": "http://swagger.io"
+                "description": "Find out more about this app",
+                "url": "https://github.com/gabrielcabralbfr/knights-app"
             }
         }
     ],
     "schemes": [
-        "https",
-        "http"
+        "http",
+        "https"
     ],
     "paths": {
-        "/knight": {
+        "/knights": {
             "get": {
                 "tags": [
                     "knight"
@@ -39,20 +40,13 @@
                 "description": "Returns a list of Knights",
                 "operationId": "getAllKnights",
                 "produces": [
-                    "application/json",
-                    "application/xml"
+                    "application/json"
                 ],
                 "responses": {
                     "200": {
-                        "description": "successful operation",
-                        "schema": {}
+                        "description": "Successful operation"
                     }
-                },
-                "security": [
-                    {
-                        "api_key": []
-                    }
-                ]
+                }
             },
             "post": {
                 "tags": [
@@ -60,26 +54,59 @@
                 ],
                 "summary": "Creates a new knight",
                 "description": "",
-                "consumes": [
-                    "application/x-www-form-urlencoded"
-                ],
                 "produces": [
-                    "application/json",
-                    "application/xml"
+                    "application/json"
                 ],
                 "parameters": [
                     {
-                        "name": "petId",
-                        "in": "path",
-                        "description": "ID of pet that needs to be updated",
+                        "in": "body",
+                        "name": "body",
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "schema": {
+                            "$ref": "#/definitions/Knight"
+                        }
                     }
                 ],
                 "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
                     "400": {
                         "description": "Invalid input"
+                    }
+                }
+            }
+        },
+        "/knights/{knightId}": {
+            "get": {
+                "tags": [
+                    "knight"
+                ],
+                "summary": "Find a specific knight",
+                "description": "Returns a Knight with given ID",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "knightId",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true,
+                        "description": "ID of the knight to be found"
+                    }
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "400": {
+                        "description": "Invalid parameter"
+                    },
+                    "404": {
+                        "description": "Knight not found"
                     }
                 }
             },
@@ -87,21 +114,20 @@
                 "tags": [
                     "knight"
                 ],
-                "summary": "Deletes a knight",
-                "description": "",
+                "summary": "Delete a knight with given ID",
+                "description": "This method will remove a Knight with given ID and make it a hero",
                 "produces": [
-                    "application/json",
-                    "application/xml"
+                    "application/json"
                 ],
                 "parameters": [
-
                     {
-                        "name": "knightId",
                         "in": "path",
-                        "description": "Knight id to delete",
+                        "name": "knightId",
+                        "schema": {
+                            "type": "string"
+                        },
                         "required": true,
-                        "type": "integer",
-                        "format": "int64"
+                        "description": "ID of the knight to be found"
                     }
                 ],
                 "responses": {
@@ -110,6 +136,9 @@
                     },
                     "404": {
                         "description": "Knight not found"
+                    },
+                    "200": {
+                        "description": "Successfull operation"
                     }
                 }
             }
@@ -118,28 +147,23 @@
     "definitions": {
         "Knight": {
             "type": "object",
-            "required": [
-                "name",
-                "photoUrls"
-            ],
-            "schema": {
-                "$ref": "./models/Knight"
-            },
-            "xml": {
-                "name": "Pet"
-            }
-        },
-        "ApiResponse": {
-            "type": "object",
             "properties": {
-                "code": {
-                    "type": "integer",
-                    "format": "int32"
-                },
-                "type": {
+                "name": {
                     "type": "string"
                 },
-                "message": {
+                "nickname": {
+                    "type": "string"
+                },
+                "birthday": {
+                    "type": "string"
+                },
+                "weapons": {
+                    "type": "object"
+                },
+                "attributes": {
+                    "type": "object"
+                },
+                "keyAttribute": {
                     "type": "string"
                 }
             }
