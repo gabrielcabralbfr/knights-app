@@ -1,4 +1,5 @@
 const { Knight } = require("../models/Knight")
+const { Hero } = require("../models/Hero")
 module.exports = {
     getAll: ({ res }) => {
         Knight.find({}, function (err, knights) {
@@ -35,10 +36,22 @@ module.exports = {
         })
     },
     deleteById: ({ params, res }) => {
-        Knight.deleteOne({ _id: params.knightId }, function (err, knight) {
+        Knight.findById(params.knightId, function (err, knight) {
             if (err) return res.status(400).send(err)
-            res.send(knight)
+            var hero = new Hero(knight)
+            console.log(hero);
+            
+            hero.save(function (err) {
+                if (err) return res.status(400).send(err)
+
+                Knight.deleteOne({ _id: params.knightId }, function (err, knight) {
+                    if (err) return res.status(400).send(err)
+                    res.send(knight)
+                })
+            })
+
         })
+
     },
     updateKnight: ({ params, res, body }) => {
         if (!body.nickname) res.status(400).send({ error: "Missing nickname property" })
