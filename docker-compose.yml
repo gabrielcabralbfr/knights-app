@@ -1,0 +1,17 @@
+version: '3'
+services:
+    server:
+        build: .
+        ports:
+            - '3000:3000'
+        volumes:
+            - 
+    client:
+        build: ./views/knights-ui
+        ports:
+            - '8000:4200'
+        volumes:
+            - 
+    database:
+        image: tutum/mongodb
+        ports: 27017:27017
