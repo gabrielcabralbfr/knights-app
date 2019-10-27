@@ -1,12 +1,13 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <span>Knights application</span>
-  <img class="add-knight" src="../assets/add_circle-24px.svg"  alt="Adicionar Knigt">
+  <img class="add-knight" src="../assets/add_circle-24px.svg" alt="Adicionar Knigt">
   <span class="tooltip add-tooltip">Adicionar novo Knight</span>
 
 </div>
 
 <div class="content" role="main">
+  <router-outlet> </router-outlet>
 
   <mat-card *ngFor="let knight of knightsList" class="knight-card">
     <mat-card-header class="card-header">

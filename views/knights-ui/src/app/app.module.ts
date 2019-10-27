@@ -7,18 +7,23 @@ import { AppComponent } from './app.component';
 
 import { MatCardModule } from '@angular/material/card';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateKnightComponent } from './create-knight/create-knight.component';
+
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CreateKnightComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     MatCardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    FormsModule 
   ],
   providers: [],
   bootstrap: [AppComponent]
