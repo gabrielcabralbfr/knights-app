@@ -7,10 +7,14 @@ import { KnightService } from 'src/_services/knight/knight.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  public knightsList = []
 
-  constructor(private knightService: KnightService) {}
+  constructor(private knightService: KnightService) { }
   ngOnInit(): void {
-    this.knightService.getAllKnights().subscribe(response => console.log(response))
+    this.knightService.getAllKnights().subscribe(response => {
+      console.log(response);
+      
+      this.knightsList = response
+    })
   }
-  title = 'knights-ui';
 }

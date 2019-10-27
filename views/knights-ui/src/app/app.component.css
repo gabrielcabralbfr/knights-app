@@ -7,47 +7,73 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 8px 0;
+.knight-card {
+    margin: 30px auto;
+    max-width: 450px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 2px 2px 5px #333;
 }
 
-p {
-    margin: 0;
+.attr-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0px
+}
+
+mat-card-header {
+    justify-content: space-between;
+}
+
+mat-card-subtitle {
+    font-size: 12px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.add-tooltip {
+    border-radius: 4px;
+    background-color: #000;
+    color: #fff;
+    padding: 10px;
+    font-weight: lighter;
+    font-size: 10px;
+    z-index: 2;
+    /* display: none; */
+}
+span.add-tooltip {
+    position: absolute;
+    top: 65px;
+    right: 10px;
+    display: none;
+}
+img.add-knight:hover + span.add-tooltip {
+    display: block;
+}
+
+.attr-container span {
+    display: flex;
+    place-items: flex-end;
+}
+
+.sword-icon {
+    width: 15px;
+    height: auto;
 }
 
 .toolbar {
     height: 60px;
-    margin: -8px;
-    padding-left: 20px;
+    padding: 0 20px;
     display: flex;
     align-items: center;
-    background-color: #1976d2;
+    background-color: #000;
     color: white;
     font-weight: 600;
+    justify-content: space-between;
 }
 
-/* Responsive Styles */
-
-@media screen and (max-width: 767px) {
-    .card-container>*:not(.circle-link), .terminal {
-        width: 100%;
-    }
-    .card:not(.highlight-card) {
-        height: 16px;
-        margin: 8px 0;
-    }
-    .card.highlight-card span {
-        margin-left: 72px;
-    }
-    svg#rocket-smoke {
-        right: 120px;
-        transform: rotate(-5deg);
-    }
-}
-
-@media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-        display: none;
-        visibility: hidden;
-    }
+.bold {
+    font-weight: bolder;
 }

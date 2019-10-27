@@ -13,4 +13,20 @@ export class KnightService {
   getAllKnights(): Observable<any> {
     return this.http.get(`${environment.apiUrl}/knights`)
   }
+
+  getKnightById(id: string): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/knights/${id}`)
+  }
+
+  deleteKnight(id: string): Observable<any> {
+    return this.http.delete(`${environment.apiUrl}/knights/${id}`)
+  }
+
+  createKnight(knight: any): Observable<any> {
+    return this.http.post(`${environment.apiUrl}/knights/`, knight)
+  }
+
+  updateKnight(knight: any): Observable<any> {
+    return this.http.put(`${environment.apiUrl}/knights/`, knight)
+  }
 }

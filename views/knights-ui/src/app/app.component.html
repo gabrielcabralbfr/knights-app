@@ -1,7 +1,37 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <span>Knights application</span>
+  <img class="add-knight" src="../assets/add_circle-24px.svg"  alt="Adicionar Knigt">
+  <span class="tooltip add-tooltip">Adicionar novo Knight</span>
+
 </div>
 
 <div class="content" role="main">
+
+  <mat-card *ngFor="let knight of knightsList" class="knight-card">
+    <mat-card-header class="card-header">
+      <mat-card-title class="bold">{{ knight?.nome }}</mat-card-title>
+      <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
+      <div class="actions">
+        <img src="../assets/create-24px.svg" title="Editar" alt="Editar Knight">
+        <img src="../assets/delete-24px.svg" title="Remover" alt="Remover Knigt">
+      </div>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="knight-info">
+        <div class="attr-container">
+          <span class="bold">Armas</span> <span class="weapon-info">
+            <img class="sword-icon" *ngFor="let i of [].constructor(knight.armas)" src="../assets/Knight_swords-512.png"
+              alt="">
+          </span>
+          <span class="bold">Idade</span> <span class="age-info">{{ knight?.idade }}</span>
+        </div>
+        <div class="attr-container">
+          <span class="bold">Ataque</span> <span class="attack-info">{{ knight?.ataque }}</span>
+          <span class="bold">XP</span> <span class="exp-info"><progress [value]=knight?.exp
+              max="5000"></progress></span>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
 </div>

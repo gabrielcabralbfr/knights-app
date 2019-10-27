@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require("cors");
 
 var indexRouter = require('./routes/index');
 var knightsRouter = require('./routes/knights');
@@ -9,7 +10,7 @@ var knightsRouter = require('./routes/knights');
 var mongoose = require('mongoose');
 
 var app = express();
-
+app.use(cors())
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./swagger.json');
  
