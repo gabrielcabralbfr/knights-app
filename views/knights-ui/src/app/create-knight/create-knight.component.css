@@ -1,0 +1,7 @@
+div.alert>div {
+    color: red;
+}
+
+.attributes mat-slider {
+    max-width: 50px;
+}

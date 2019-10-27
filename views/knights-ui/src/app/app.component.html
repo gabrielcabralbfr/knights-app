@@ -1,7 +1,10 @@
 <!-- Toolbar -->
 <div class="toolbar" role="banner">
   <span>Knights application</span>
-  <img class="add-knight" src="../assets/add_circle-24px.svg" alt="Adicionar Knigt">
+  <!-- <img  src="../assets/add_circle-24px.svg" alt="Adicionar Knigt"> -->
+  <button [routerLink]="['/create/knight']" class="add-knight" mat-mini-fab color="primary">
+    <mat-icon>add</mat-icon>
+  </button>
   <span class="tooltip add-tooltip">Adicionar novo Knight</span>
 
 </div>
@@ -11,7 +14,7 @@
 
   <mat-card *ngFor="let knight of knightsList" class="knight-card">
     <mat-card-header class="card-header">
-      <mat-card-title class="bold">{{ knight?.nome }}</mat-card-title>
+      <mat-card-title class="bold">{{ knight?.nome }} ({{ knight?.apelido}})</mat-card-title>
       <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
       <div class="actions">
         <img src="../assets/create-24px.svg" title="Editar" alt="Editar Knight">

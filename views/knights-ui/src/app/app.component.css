@@ -49,7 +49,7 @@ span.add-tooltip {
     right: 10px;
     display: none;
 }
-img.add-knight:hover + span.add-tooltip {
+.add-knight:hover + span.add-tooltip {
     display: block;
 }
 

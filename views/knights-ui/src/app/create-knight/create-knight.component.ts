@@ -9,8 +9,7 @@ import { Knight } from 'src/_models/knight.model';
   styleUrls: ['./create-knight.component.css']
 })
 export class CreateKnightComponent implements OnInit {
-  checkoutForm;
-  items;
+  value;
   knight: Knight = new Knight("");
   constructor(
     private knightService: KnightService

@@ -1,23 +1,126 @@
 <form #knightForm="ngForm" (ngSubmit)="onSubmit(knightForm.value)">
-    Name:
-    <input id="name" name="name" class="form-control" required minlength="4"
-        [(ngModel)]="knight.name" #name="ngModel">
-
-    <button class="button" type="submit">Criar </button>
-
-
-    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-
-        <div *ngIf="name.errors.required">
-            Name is required.
+    <div class="form-group">
+        <mat-form-field>
+            <mat-label>Nome do Guerreiro</mat-label>
+            <input matInput placeholder="Nome" id="name" name="name" class="form-control" required minlength="4"
+                [(ngModel)]="knight.name" #name="ngModel">
+        </mat-form-field>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+                Nome é obrigatório.
+            </div>
+            <div *ngIf="name.errors.minlength">
+                Nome deve ter ao menos 4 caracteres.
+            </div>
         </div>
-        <div *ngIf="name.errors.minlength">
-            Name must be at least 4 characters long.
+
+        <mat-form-field>
+            <mat-label>Apelido do Guerreiro</mat-label>
+            <input matInput placeholder="Apelido" id="nickname" name="nickname" class="form-control" required
+                minlength="2" [(ngModel)]="knight.nickname" #nickname="ngModel">
+        </mat-form-field>
+        <div *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)" class="alert alert-danger">
+            <div *ngIf="nickname.errors.required">
+                Apelido é obrigatório.
+            </div>
+            <div *ngIf="nickname.errors.minlength">
+                Apelido deve ter ao menos 2 caracteres.
+            </div>
         </div>
-        <div *ngIf="name.errors.forbiddenName">
-            Name cannot be Bob.
+    </div>
+
+    <div class="form-group">
+        <mat-form-field>
+            <input required [(ngModel)]="knight.birthday" #birthday="ngModel" matInput [matDatepicker]="picker"
+                placeholder="Nascimento do Guerreiro" name="birthday">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+        <div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)" class="alert alert-danger">
+            <div *ngIf="birthday.errors.required">
+                Data de nascimento é obrigatório.
+            </div>
         </div>
+
+        <mat-form-field>
+            <mat-label>Atributo Principal</mat-label>
+            <input matInput placeholder="keyAttribute" id="keyAttribute" name="keyAttribute" class="form-control"
+                required minlength="2" [(ngModel)]="knight.keyAttribute" #keyAttribute="ngModel">
+        </mat-form-field>
+        <div *ngIf="keyAttribute.invalid && (keyAttribute.dirty || keyAttribute.touched)" class="alert alert-danger">
+            <div *ngIf="keyAttribute.errors.required">
+                Atributo principal é obrigatório.
+            </div>
+            <div *ngIf="keyAttribute.errors.minlength">
+                Atributo deve ter ao menos 2 caracteres.
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p>Armas</p>
+        <mat-form-field>
+            <mat-label>Nome da arma</mat-label>
+            <input matInput placeholder="Nome" id="weaponName" name="weaponName" class="form-control"
+                [(ngModel)]="knight.weapon" #weaponName="ngModel">
+        </mat-form-field>
+
+        <!-- <mat-form-field> -->
+        <mat-label>Mod da arma</mat-label>
+        <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+            #weaponMod="ngModel">
+        </mat-slider>
+
+        <mat-form-field>
+            <mat-label>Atributo da arma</mat-label>
+            <input matInput placeholder="Nome" id="name" name="name" class="form-control" required minlength="4"
+                [(ngModel)]="knight.name" #name="ngModel">
+        </mat-form-field>
+        <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+            <div *ngIf="name.errors.required">
+                Nome é obrigatório.
+            </div>
+            <div *ngIf="name.errors.minlength">
+                Nome deve ter ao menos 4 caracteres.
+            </div>
+        </div>
+
+        <mat-checkbox>Equipped</mat-checkbox>
 
     </div>
+
+    <div class="form-group">
+        <p>Atributos</p>
+        <div class="attributes">
+            <mat-label>Força</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+            <mat-label>Destreza</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+            <mat-label>Constituição</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+        </div>
+        <div class="attributes">
+            <mat-label>Inteligência</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+            <mat-label>Sabedoria</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+            <mat-label>Carisma</mat-label>
+            <mat-slider name="mod" class="example-margin" [step]="1" max=25 [(ngModel)]="knight.weaponMod"
+                #weaponMod="ngModel">
+            </mat-slider>
+        </div>
+    </div>
+
+    <button mat-raised-button color="primary" type="submit">Criar</button>
 
 </form>

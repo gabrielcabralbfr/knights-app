@@ -10,6 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateKnightComponent } from './create-knight/create-knight.component';
 
 import { FormsModule } from '@angular/forms';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule, MatNativeDateModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -23,9 +30,17 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     MatCardModule,
     BrowserAnimationsModule,
-    FormsModule 
+    FormsModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatSliderModule,
+    MatCheckboxModule
   ],
-  providers: [],
+  providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
