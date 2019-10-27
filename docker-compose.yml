@@ -1,0 +1,18 @@
+version: "3"
+services:
+    # database:
+    #     image: tutum/mongodb
+    #     ports: 
+    #         - '27017:27017'
+    #     environment: 
+    #         AUTH: 'no'
+    server:
+        build: .
+        ports:
+            - '3000:3000'
+        # depends_on: 
+        #     - database
+    # client:
+    #     build: ./views/knights-ui
+    #     ports:
+    #         - '8000:4200'
