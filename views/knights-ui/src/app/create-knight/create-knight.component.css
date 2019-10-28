@@ -1,7 +1,43 @@
-div.alert>div {
+.alert span {
     color: red;
+    font-size: 10px;
+    margin: 15px;
 }
 
 .attributes mat-slider {
     max-width: 50px;
+}
+
+.attributes {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+mat-form-field, mat-slider {
+    margin: 15px;
+}
+
+.slider-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.slider-container mat-label {
+    position: absolute;
+}
+
+.form-container {
+    margin: 30px;
+}
+
+.form-group.space {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+button[type='submit'] {
+    float: right;
 }

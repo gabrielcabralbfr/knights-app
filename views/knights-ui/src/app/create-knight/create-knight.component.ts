@@ -9,7 +9,6 @@ import { Knight } from 'src/_models/knight.model';
   styleUrls: ['./create-knight.component.css']
 })
 export class CreateKnightComponent implements OnInit {
-  value;
   knight: Knight = new Knight("");
   constructor(
     private knightService: KnightService
@@ -18,10 +17,16 @@ export class CreateKnightComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  handleWeaponChanged(event: any) {
+    console.log(event);
+    this.knight.weapons = event
+    
+  }
   onSubmit(knightData) {
     // Process checkout data here
-    console.warn('Your order has been submitted', knightData);
+    console.log('Your order has been submitted', knightData);
+    console.log(this.knight);
+    
 
     // this.items = this.knightService.createKnight({});
     // this.checkoutForm.reset();

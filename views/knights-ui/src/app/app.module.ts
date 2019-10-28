@@ -17,14 +17,19 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 import { CreateWeaponComponent } from './create-weapon/create-weapon.component';
+import { ListKnightComponent } from './list-knight/list-knight.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateKnightComponent,
-    CreateWeaponComponent
+    CreateWeaponComponent,
+    ListKnightComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +45,10 @@ import { CreateWeaponComponent } from './create-weapon/create-weapon.component';
     MatNativeDateModule,
     MatIconModule,
     MatSliderModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatTooltipModule
+    
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]
