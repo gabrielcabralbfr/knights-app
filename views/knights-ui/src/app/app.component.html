@@ -1,41 +1,14 @@
-<!-- Toolbar -->
 <div class="toolbar" role="banner">
   <span>Knights application</span>
-  <!-- <img  src="../assets/add_circle-24px.svg" alt="Adicionar Knigt"> -->
-  <button [routerLink]="['/create/knight']" class="add-knight" mat-mini-fab color="primary">
-    <mat-icon>add</mat-icon>
-  </button>
-  <span class="tooltip add-tooltip">Adicionar novo Knight</span>
-
+  <div>
+    <button matTooltip="Ver lista de Knights" [routerLink]="['/list/knight']" class="list-knight" mat-mini-fab color="primary">
+      <mat-icon>list</mat-icon>
+    </button>
+    <button matTooltip="Cadastrar um novo Knight" [routerLink]="['/create/knight']" class="add-knight" mat-mini-fab color="accent">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 </div>
-
 <div class="content" role="main">
   <router-outlet> </router-outlet>
-
-  <mat-card *ngFor="let knight of knightsList" class="knight-card">
-    <mat-card-header class="card-header">
-      <mat-card-title class="bold">{{ knight?.nome }} ({{ knight?.apelido}})</mat-card-title>
-      <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
-      <div class="actions">
-        <img src="../assets/create-24px.svg" title="Editar" alt="Editar Knight">
-        <img src="../assets/delete-24px.svg" title="Remover" alt="Remover Knigt">
-      </div>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="knight-info">
-        <div class="attr-container">
-          <span class="bold">Armas</span> <span class="weapon-info">
-            <img class="sword-icon" *ngFor="let i of [].constructor(knight.armas)" src="../assets/Knight_swords-512.png"
-              alt="">
-          </span>
-          <span class="bold">Idade</span> <span class="age-info">{{ knight?.idade }}</span>
-        </div>
-        <div class="attr-container">
-          <span class="bold">Ataque</span> <span class="attack-info">{{ knight?.ataque }}</span>
-          <span class="bold">XP</span> <span class="exp-info"><progress [value]=knight?.exp
-              max="5000"></progress></span>
-        </div>
-      </div>
-    </mat-card-content>
-  </mat-card>
 </div>

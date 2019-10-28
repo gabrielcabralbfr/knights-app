@@ -1,0 +1,45 @@
+<div *ngIf="!isLoading">
+    <mat-card *ngFor="let knight of knightsList" class="knight-card">
+        <mat-card-header class="card-header">
+            <mat-card-title class="bold">{{ knight?.nome }} ({{ knight?.apelido}})</mat-card-title>
+            <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
+            <div class="actions">
+                <img src="../assets/create-24px.svg" matTooltip="Editar este knight" alt="Editar Knight">
+                <img (click)="deleteKnight(knight.id)" src="../assets/delete-24px.svg" matTooltip="Remover este knight" alt="Remover Knigt">
+            </div>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="knight-info">
+                <div class="attr-container">
+                    <div>
+                        <span class="bold">Qtd. Armas</span> <span class="weapon-info">
+                            <img class="sword-icon" *ngFor="let i of [].constructor(knight.armas)"
+                                src="../assets/Knight_swords-512.png" alt="">
+                        </span>
+                    </div>
+                    <div>
+                        <span class="bold">Idade</span> <span class="age-info">{{ knight?.idade }}</span>
+                    </div>
+
+                </div>
+                <div class="attr-container">
+                    <div>
+                        <span class="bold">Ataque</span> <span class="attack-info">{{ knight?.ataque }}</span>
+                    </div>
+                    <div>
+                        <span class="bold">XP</span> <span class="exp-info"><progress [matTooltip]="knight?.exp" [value]='knight?.exp'
+                                max="3000"></progress></span>
+                    </div>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>
+<div class="loading-container">
+    <mat-progress-spinner *ngIf="isLoading" [color]="'prmary'" [mode]="'indeterminate'" diameter="30" [value]="25">
+    </mat-progress-spinner>
+</div>
+
+<div *ngIf="knightsList.length === 0 && !isLoading" class="no-result">
+    <p>Desculpe, nenhum knight encontrado! Você pode cadastrar um <a [routerLink]='["/create/knight"]'> aqui</a></p>
+</div>
