@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Weapon } from 'src/_models/weapon.model';
 
 @Component({
@@ -9,8 +9,13 @@ import { Weapon } from 'src/_models/weapon.model';
 export class CreateWeaponComponent implements OnInit {
   public weapon: Weapon = new Weapon();
   constructor() { }
+  @Output() weaponChanged = new EventEmitter<any>()
 
   ngOnInit() {
+  }
+
+  sendWeapon(event: any) {
+    this.weaponChanged.emit(this.weapon)
   }
 
 }

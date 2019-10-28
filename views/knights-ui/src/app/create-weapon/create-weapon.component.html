@@ -3,21 +3,21 @@
     <mat-form-field>
         <mat-label>Nome da arma</mat-label>
         <input matInput placeholder="Nome" id="weaponName" name="weaponName" class="form-control"
-            [(ngModel)]="weapon.name" #weaponName="ngModel">
+            [(ngModel)]="weapon.name" #weaponName="ngModel" (ngModelChange)="sendWeapon()">
     </mat-form-field>
 
     <mat-form-field>
         <mat-label>Atributo da arma</mat-label>
         <input matInput placeholder="Nome" id="weaponAttr" name="weaponAttr" class="form-control"
-            [(ngModel)]="weapon.attr" #weaponAttr="ngModel">
+            [(ngModel)]="weapon.attr" #weaponAttr="ngModel" (ngModelChange)="sendWeapon()">
     </mat-form-field>
 </div>
 
 <div class="weapon-creation">
-    <mat-checkbox [(ngModel)]="weapon.equipped">Equipped</mat-checkbox>
+    <mat-checkbox [(ngModel)]="weapon.equipped" (ngModelChange)="sendWeapon()">Equipped</mat-checkbox>
     <div class="slider-container">
-        <mat-label>Mod da arma</mat-label>
-        <mat-slider name="weaponMod" [step]="1" max=25 [(ngModel)]="weapon.mod" #weaponMod="ngModel">
+        <mat-label>Mod da arma {{ weapon.mod }}</mat-label>
+        <mat-slider name="weaponMod" [step]="1" max=25 [(ngModel)]="weapon.mod" #weaponMod="ngModel" (ngModelChange)="sendWeapon()" >
         </mat-slider>
     </div>
 </div>
