@@ -1,0 +1,24 @@
+
+mat-form-field, mat-slider {
+    margin: 15px;
+}
+
+.slider-container {
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+}
+
+.slider-container mat-label {
+    position: absolute;
+}
+.mat-slider-horizontal {
+height: unset;
+}
+
+.weapon-creation {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.weapon-creation div {}

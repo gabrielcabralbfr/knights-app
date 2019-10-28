@@ -17,12 +17,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { CreateWeaponComponent } from './create-weapon/create-weapon.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    CreateKnightComponent
+    CreateKnightComponent,
+    CreateWeaponComponent
   ],
   imports: [
     BrowserModule,
