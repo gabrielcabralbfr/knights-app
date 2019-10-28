@@ -8,28 +8,25 @@ import { Knight } from 'src/_models/knight.model';
   templateUrl: './create-knight.component.html',
   styleUrls: ['./create-knight.component.css']
 })
-export class CreateKnightComponent implements OnInit {
+export class CreateKnightComponent {
   knight: Knight = new Knight("");
   constructor(
     private knightService: KnightService
   ) {
   }
-
-  ngOnInit() {
-  }
   handleWeaponChanged(event: any) {
-    console.log(event);
     this.knight.weapons = event
-    
   }
-  onSubmit(knightData) {
-    // Process checkout data here
-    console.log('Your order has been submitted', knightData);
+  onSubmit() {
     console.log(this.knight);
-    
+    this.knightService.createKnight(this.knight).subscribe(response => {
+      // TODO: SNACKBAR INFORMANDO SUCESSO
 
-    // this.items = this.knightService.createKnight({});
-    // this.checkoutForm.reset();
+      console.log(response)
+    }, error => {
+      // TODO: SNACKBAR INFORMANDO ERRO
+
+    });
   }
 
 }

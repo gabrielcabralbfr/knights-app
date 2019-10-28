@@ -18,19 +18,24 @@ export class ListKnightComponent implements OnInit {
     this.knightService.getAllKnights().subscribe(response => {
       this.knightsList = response
       this.isLoading = false
+    }, error => {
+      this.isLoading = false
+      // TODO: SNACKBAR INFORMANDO ERRO
     })
   }
 
   deleteKnight(id: string): void {
-    const knightToBeDeleted = this.knightsList.filter(knight => knight.id == id)
+    let knightToBeDeleted = this.knightsList.filter(knight => knight.id == id)
+    knightToBeDeleted = knightToBeDeleted[0]
     console.log("To be deleted", knightToBeDeleted);
     
     this.knightService.deleteKnight(id).subscribe(response => {
-      this.knightsList.slice(this.knightsList.indexOf(knightToBeDeleted))
+      this.knightsList.splice(this.knightsList.indexOf(knightToBeDeleted), 1)
       console.log('After deletion', this.knightsList);
       
     }, error => {
       console.log("Náo foi possivel deleter o knight");
+      // TODO: SNACKBAR INFORMANDO ERRO
       
     })
   }
