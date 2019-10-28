@@ -15,7 +15,8 @@ module.exports = {
                     atributo: knight.keyAttribute,
                     ataque: knight.attack,
                     exp: knight.exp,
-                    apelido: knight.nickname
+                    apelido: knight.nickname,
+                    id: knight.id
                 }
                 knightsList.push(tempKnight)
             })
