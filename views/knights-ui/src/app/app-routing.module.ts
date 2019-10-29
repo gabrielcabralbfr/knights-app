@@ -12,6 +12,10 @@ const routes: Routes = [
   {
     path: "list/knight",
     component: ListKnightComponent
+  },
+  {
+    path: "",
+    component: ListKnightComponent
   }
 ];
 
