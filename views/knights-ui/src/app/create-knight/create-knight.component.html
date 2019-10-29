@@ -1,126 +1,134 @@
 <div class="form-container">
-    <form #knightForm="ngForm" (ngSubmit)="onSubmit(knightForm.value)">
-        <p>Informações básicas</p>
-        <div class="form-group space">
+    <mat-horizontal-stepper [linear]="false" #stepper>
+        <mat-step>
+            <ng-template matStepLabel>Básico</ng-template>
+            <div class="grid-container">
+                <div class="grid-item">
+                    <mat-form-field>
+                        <mat-label>Nome do Guerreiro</mat-label>
+                        <input matInput placeholder="Nome" id="name" name="name" class="form-control" required
+                            minlength="4" [(ngModel)]="knight.name" #name="ngModel">
+                    </mat-form-field>
+                    <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
+                        <span *ngIf="name.errors.required">
+                            Nome é obrigatório.
+                        </span>
+                        <span *ngIf="name.errors.minlength">
+                            Nome deve ter ao menos 4 caracteres.
+                        </span>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <mat-form-field>
+                        <mat-label>Apelido do Guerreiro</mat-label>
+                        <input matInput placeholder="Apelido" id="nickname" name="nickname" class="form-control"
+                            required minlength="2" [(ngModel)]="knight.nickname" #nickname="ngModel">
+                    </mat-form-field>
+                    <div *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)" class="alert alert-danger">
+                        <span *ngIf="nickname.errors.required">
+                            Apelido é obrigatório.
+                        </span>
+                        <span *ngIf="nickname.errors.minlength">
+                            Apelido deve ter ao menos 2 caracteres.
+                        </span>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <mat-form-field>
+                        <input required [(ngModel)]="knight.birthday" #birthday="ngModel" matInput
+                            [matDatepicker]="picker" placeholder="Nascimento do Guerreiro" name="birthday">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                    <div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)" class="alert alert-danger">
+                        <span *ngIf="birthday.errors.required">
+                            Data de nascimento é obrigatório.
+                        </span>
+                    </div>
+                </div>
+                <div class="grid-item">
+                    <mat-form-field>
+                        <mat-label>Atributo Principal</mat-label>
+                        <input matInput placeholder="keyAttribute" id="keyAttribute" name="keyAttribute"
+                            class="form-control" required minlength="2" [(ngModel)]="knight.keyAttribute"
+                            #keyAttribute="ngModel">
+                    </mat-form-field>
+                    <div *ngIf="keyAttribute.invalid && (keyAttribute.dirty || keyAttribute.touched)"
+                        class="alert alert-danger">
+                        <span *ngIf="keyAttribute.errors.required">
+                            Atributo principal é obrigatório.
+                        </span>
+                        <span *ngIf="keyAttribute.errors.minlength">
+                            Atributo deve ter ao menos 2 caracteres.
+                        </span>
+                    </div>
+                </div>
+            </div>
             <div>
-                <mat-form-field>
-                    <mat-label>Nome do Guerreiro</mat-label>
-                    <input matInput placeholder="Nome" id="name" name="name" class="form-control" required minlength="4"
-                        [(ngModel)]="knight.name" #name="ngModel">
-                </mat-form-field>
-                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-                    <span *ngIf="name.errors.required">
-                        Nome é obrigatório.
-                    </span>
-                    <span *ngIf="name.errors.minlength">
-                        Nome deve ter ao menos 4 caracteres.
-                    </span>
+                <button mat-button matStepperNext>Continuar</button>
+            </div>
+        </mat-step>
+
+        <mat-step>
+            <div class="form-group">
+                <ng-template matStepLabel>Atributos</ng-template>
+
+                <div class="attr-grid-container">
+                    <div class="slider-container">
+                        <mat-label>Força {{ knight.attributes.strength }}</mat-label>
+                        <mat-slider name="strength" [step]="1" max=25 [(ngModel)]="knight.attributes.strength"
+                            #attributes.strength="ngModel">
+                        </mat-slider>
+                    </div>
+                    <div class="slider-container">
+                        <mat-label>Destreza {{ knight.attributes.dexterity }}</mat-label>
+                        <mat-slider name="dexterity" [step]="1" max=25 [(ngModel)]="knight.attributes.dexterity"
+                            #dexterity="ngModel">
+                        </mat-slider>
+                    </div>
+                    <div class="slider-container">
+                        <mat-label>Constituição {{ knight.attributes.constitution }}</mat-label>
+                        <mat-slider name="constitution" [step]="1" max=25 [(ngModel)]="knight.attributes.constitution"
+                            #constitution="ngModel">
+                        </mat-slider>
+                    </div>
+                    <div class="slider-container">
+                        <mat-label>Inteligência {{ knight.attributes.intelligence }}</mat-label>
+                        <mat-slider name="intelligence" [step]="1" max=25 [(ngModel)]="knight.attributes.intelligence"
+                            #intelligence="ngModel">
+                        </mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Sabedoria {{ knight.attributes.wisdom }}</mat-label>
+                        <mat-slider name="wisdom" [step]="1" max=25 [(ngModel)]="knight.attributes.wisdom"
+                            #wisdom="ngModel">
+                        </mat-slider>
+                    </div>
+
+                    <div class="slider-container">
+                        <mat-label>Carisma {{ knight.attributes.charisma }}</mat-label>
+                        <mat-slider name="charisma" [step]="1" max=25 [(ngModel)]="knight.attributes.charisma"
+                            #charisma="ngModel">
+                        </mat-slider>
+                    </div>
                 </div>
             </div>
-
             <div>
-                <mat-form-field>
-                    <mat-label>Apelido do Guerreiro</mat-label>
-                    <input matInput placeholder="Apelido" id="nickname" name="nickname" class="form-control" required
-                        minlength="2" [(ngModel)]="knight.nickname" #nickname="ngModel">
-                </mat-form-field>
-                <div *ngIf="nickname.invalid && (nickname.dirty || nickname.touched)" class="alert alert-danger">
-                    <span *ngIf="nickname.errors.required">
-                        Apelido é obrigatório.
-                    </span>
-                    <span *ngIf="nickname.errors.minlength">
-                        Apelido deve ter ao menos 2 caracteres.
-                    </span>
-                </div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button matStepperNext>Continuar</button>
             </div>
-        </div>
+        </mat-step>
 
-        <div class="form-group space">
-            <div>
-                <mat-form-field>
-                    <input required [(ngModel)]="knight.birthday" #birthday="ngModel" matInput [matDatepicker]="picker"
-                        placeholder="Nascimento do Guerreiro" name="birthday">
-                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                    <mat-datepicker #picker></mat-datepicker>
-                </mat-form-field>
-                <div *ngIf="birthday.invalid && (birthday.dirty || birthday.touched)" class="alert alert-danger">
-                    <span *ngIf="birthday.errors.required">
-                        Data de nascimento é obrigatório.
-                    </span>
-                </div>
-            </div>
-            <div>
-                <mat-form-field>
-                    <mat-label>Atributo Principal</mat-label>
-                    <input matInput placeholder="keyAttribute" id="keyAttribute" name="keyAttribute"
-                        class="form-control" required minlength="2" [(ngModel)]="knight.keyAttribute"
-                        #keyAttribute="ngModel">
-                </mat-form-field>
-                <div *ngIf="keyAttribute.invalid && (keyAttribute.dirty || keyAttribute.touched)"
-                    class="alert alert-danger">
-                    <span *ngIf="keyAttribute.errors.required">
-                        Atributo principal é obrigatório.
-                    </span>
-                    <span *ngIf="keyAttribute.errors.minlength">
-                        Atributo deve ter ao menos 2 caracteres.
-                    </span>
-                </div>
-            </div>
-        </div>
+        <mat-step>
+            <ng-template matStepLabel>Armas</ng-template>
 
-        <div class="form-group">
-            <p>Atributos</p>
-            <div class="attributes">
-                <div class="slider-container">
-                    <mat-label>Força {{ knight.attributes.strength }}</mat-label>
-                    <mat-slider name="strength" [step]="1" max=25 [(ngModel)]="knight.attributes.strength"
-                        #attributes.strength="ngModel">
-                    </mat-slider>
-                </div>
-
-                <div class="slider-container">
-                    <mat-label>Destreza {{ knight.attributes.dexterity }}</mat-label>
-                    <mat-slider name="dexterity" [step]="1" max=25 [(ngModel)]="knight.attributes.dexterity"
-                        #dexterity="ngModel">
-                    </mat-slider>
-                </div>
-
-                <div class="slider-container">
-                    <mat-label>Constituição {{ knight.attributes.constitution }}</mat-label>
-                    <mat-slider name="constitution" [step]="1" max=25 [(ngModel)]="knight.attributes.constitution"
-                        #constitution="ngModel">
-                    </mat-slider>
-                </div>
-
-            </div>
-            <div class="attributes">
-                <div class="slider-container">
-                    <mat-label>Inteligência {{ knight.attributes.intelligence }}</mat-label>
-                    <mat-slider name="intelligence" [step]="1" max=25 [(ngModel)]="knight.attributes.intelligence"
-                        #intelligence="ngModel">
-                    </mat-slider>
-                </div>
-
-                <div class="slider-container">
-                    <mat-label>Sabedoria {{ knight.attributes.wisdom }}</mat-label>
-                    <mat-slider name="wisdom" [step]="1" max=25 [(ngModel)]="knight.attributes.wisdom"
-                        #wisdom="ngModel">
-                    </mat-slider>
-                </div>
-
-                <div class="slider-container">
-                    <mat-label>Carisma {{ knight.attributes.charisma }}</mat-label>
-                    <mat-slider name="charisma" [step]="1" max=25 [(ngModel)]="knight.attributes.charisma"
-                        #charisma="ngModel">
-                    </mat-slider>
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
             <app-create-weapon (weaponChanged)="handleWeaponChanged($event)"></app-create-weapon>
-        </div>
-
-        <button [disabled]="knightForm.invalid  " mat-raised-button color="primary" type="submit">Criar</button>
-    </form>
+            <div>
+                <button mat-button matStepperPrevious>Voltar</button>
+                <button mat-button matStepperNext class="save-button" mat-raised-button color="accent" type="button"
+                    (click)="onSubmit(stepper)">Salvar</button>
+            </div>
+        </mat-step>
+    </mat-horizontal-stepper>
 </div>

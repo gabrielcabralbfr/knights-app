@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { KnightService } from 'src/_services/knight/knight.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-list-knight',
@@ -11,7 +12,10 @@ export class ListKnightComponent implements OnInit {
   public knightsList = []
   public isLoading: boolean;
 
-  constructor(private knightService: KnightService) { 
+  constructor(
+    private knightService: KnightService,
+    private _snackBar: MatSnackBar
+  ) {
     this.isLoading = true
   }
   ngOnInit(): void {
@@ -28,15 +32,16 @@ export class ListKnightComponent implements OnInit {
     let knightToBeDeleted = this.knightsList.filter(knight => knight.id == id)
     knightToBeDeleted = knightToBeDeleted[0]
     console.log("To be deleted", knightToBeDeleted);
-    
+
     this.knightService.deleteKnight(id).subscribe(response => {
       this.knightsList.splice(this.knightsList.indexOf(knightToBeDeleted), 1)
       console.log('After deletion', this.knightsList);
-      
+      this._snackBar.open("Knight deletado com sucesso", '',  { duration: 2000 })
+
     }, error => {
       console.log("Náo foi possivel deleter o knight");
       // TODO: SNACKBAR INFORMANDO ERRO
-      
+
     })
   }
 

@@ -34,6 +34,7 @@ var knightSchema = new Schema({
 
 knightSchema.virtual("age")
     .get(function () {
+        if (!this.birthday) return 0
         // Calculating age based on birthday
         let today = new Date()
 

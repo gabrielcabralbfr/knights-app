@@ -19,6 +19,8 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatStepperModule } from '@angular/material/stepper';
 
 import { CreateWeaponComponent } from './create-weapon/create-weapon.component';
 import { ListKnightComponent } from './list-knight/list-knight.component';
@@ -47,8 +49,10 @@ import { ListKnightComponent } from './list-knight/list-knight.component';
     MatSliderModule,
     MatCheckboxModule,
     MatProgressSpinnerModule,
-    MatTooltipModule
-    
+    MatTooltipModule,
+    MatSnackBarModule,
+    MatStepperModule
+
   ],
   providers: [MatDatepickerModule],
   bootstrap: [AppComponent]

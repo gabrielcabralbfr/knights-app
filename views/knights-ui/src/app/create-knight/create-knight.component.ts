@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { KnightService } from 'src/_services/knight/knight.service';
 import { Knight } from 'src/_models/knight.model';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-create-knight',
@@ -11,20 +12,20 @@ import { Knight } from 'src/_models/knight.model';
 export class CreateKnightComponent {
   knight: Knight = new Knight("");
   constructor(
-    private knightService: KnightService
+    private knightService: KnightService,
+    private _snackBar: MatSnackBar
   ) {
   }
   handleWeaponChanged(event: any) {
     this.knight.weapons = event
   }
-  onSubmit() {
-    console.log(this.knight);
+  onSubmit(stepper: any) {
+    stepper.reset()
     this.knightService.createKnight(this.knight).subscribe(response => {
-      // TODO: SNACKBAR INFORMANDO SUCESSO
-
-      console.log(response)
+      this._snackBar.open("Knight criado com sucesso", 'OK',  { duration: 3500 })
     }, error => {
       // TODO: SNACKBAR INFORMANDO ERRO
+      this._snackBar.open("Não foi possível criar o Guerreiro", 'OK',  { duration: 3000 })
 
     });
   }
