@@ -27,6 +27,6 @@ export class KnightService {
   }
 
   updateKnight(knight: any): Observable<any> {
-    return this.http.put(`${environment.apiUrl}/knights/`, knight)
+    return this.http.put(`${environment.apiUrl}/knights/${knight.id}`, knight)
   }
 }
