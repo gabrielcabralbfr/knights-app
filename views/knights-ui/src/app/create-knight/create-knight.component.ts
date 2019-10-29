@@ -20,13 +20,11 @@ export class CreateKnightComponent {
     this.knight.weapons = event
   }
   onSubmit(stepper: any) {
-    stepper.reset()
     this.knightService.createKnight(this.knight).subscribe(response => {
       this._snackBar.open("Knight criado com sucesso", 'OK',  { duration: 3500 })
+      stepper.reset()
     }, error => {
-      // TODO: SNACKBAR INFORMANDO ERRO
       this._snackBar.open("Não foi possível criar o Guerreiro", 'OK',  { duration: 3000 })
-
     });
   }
 
