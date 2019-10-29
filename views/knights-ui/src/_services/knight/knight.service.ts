@@ -10,8 +10,8 @@ export class KnightService {
 
   constructor(private http: HttpClient) { }
 
-  getAllKnights(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}/knights`)
+  getAllKnights(queryString: string = ''): Observable<any> {
+    return this.http.get(`${environment.apiUrl}/knights${queryString}`)
   }
 
   getKnightById(id: string): Observable<any> {
