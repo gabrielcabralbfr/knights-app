@@ -15,13 +15,13 @@ export class ListKnightComponent implements OnInit {
   public inputSize: number = 2;
 
   constructor(
-    private knightService: KnightService,
+    private _knightService: KnightService,
     private _snackBar: MatSnackBar
   ) {
     this.isLoading = true
   }
   ngOnInit(): void {
-    this.knightService.getAllKnights().subscribe(response => {
+    this._knightService.getAllKnights().subscribe(response => {
       this.knightsList = response
       this.isLoading = false
     }, error => {
@@ -33,7 +33,7 @@ export class ListKnightComponent implements OnInit {
   deleteKnight(id: string): void {
     let knightToBeDeleted = this.knightsList.filter(knight => knight.id == id)
     knightToBeDeleted = knightToBeDeleted[0]
-    this.knightService.deleteKnight(id).subscribe(response => {
+    this._knightService.deleteKnight(id).subscribe(response => {
       this.knightsList.splice(this.knightsList.indexOf(knightToBeDeleted), 1)
       this._snackBar.open("Knight deletado com sucesso! Agora ele se tornou um herói", 'OK', { duration: 2500 })
     }, error => {
@@ -58,7 +58,7 @@ export class ListKnightComponent implements OnInit {
 
   finishEdition(knight: Knight): void {
     let newNickname = (document.getElementById('editInput') as HTMLInputElement).value
-    this.knightService.updateKnight({ nickname: newNickname, id: knight.id }).subscribe(response => {
+    this._knightService.updateKnight({ nickname: newNickname, id: knight.id }).subscribe(response => {
       let index = this.knightsList.indexOf(knight);
       this.knightsList[index].isEditing = this.knightsList[index].isEditing ? false : true
       this.knightsList[index].apelido = newNickname
@@ -76,7 +76,7 @@ export class ListKnightComponent implements OnInit {
     this.isLoading = true
     let queryString = ''
     if (event.checked) queryString = `?filter=heroes`
-    this.knightService.getAllKnights(queryString).subscribe(response => {
+    this._knightService.getAllKnights(queryString).subscribe(response => {
       this.knightsList = response
       this.isLoading = false
     })
