@@ -1,4 +1,4 @@
-`# Knights application
+# Knights application
 
 ## Dependencies
 
