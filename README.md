@@ -1,4 +1,4 @@
-# Knights application
+`# Knights application
 
 ## Dependencies
 
@@ -17,12 +17,12 @@ docker-compose start
 ```
 
 2. With NPM
-On root folter
+On root directory
 ```bash
 npm start
 ```
-Open another terminal
-```bash
-cd views/knights-ui
-npm start
-```
+- Open another terminal
+        ```bash
+        cd views/knights-ui
+        npm start
+        ```
