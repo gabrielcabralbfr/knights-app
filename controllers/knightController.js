@@ -16,7 +16,8 @@ module.exports = {
                     ataque: knight.attack,
                     exp: knight.exp,
                     apelido: knight.nickname,
-                    id: knight.id
+                    id: knight.id,
+                    isHero: knight.hallOfHeroes
                 }
                 knightsList.push(tempKnight)
             })
