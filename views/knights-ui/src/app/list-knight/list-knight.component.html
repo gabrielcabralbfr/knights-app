@@ -1,11 +1,21 @@
 <div *ngIf="!isLoading">
     <mat-card *ngFor="let knight of knightsList" class="knight-card">
         <mat-card-header class="card-header">
-            <mat-card-title class="bold">{{ knight?.nome }} ({{ knight?.apelido}})</mat-card-title>
+            <mat-card-title class="bold">
+                {{ knight?.nome }}
+                <span *ngIf="knight.isEditing">
+                    ( <input (keyup)="updateInputLength($event)" id="editInput" [value]="knight.apelido" type="text" [size]="inputSize + 1">)
+                    <button mat-raised-button color="accent" (click)="finishEdition(knight)">OK</button>
+                </span>
+                <span *ngIf="!knight.isEditing">({{ knight?.apelido}})</span>
+
+            </mat-card-title>
             <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
             <div class="actions">
-                <img src="../assets/create-24px.svg" matTooltip="Editar este knight" alt="Editar Knight">
-                <img (click)="deleteKnight(knight.id)" src="../assets/delete-24px.svg" matTooltip="Remover este knight" alt="Remover Knigt">
+                <img (click)="editKnight(knight)" src="../assets/create-24px.svg" matTooltip="Editar este knight"
+                    alt="Editar Knight">
+                <img (click)="deleteKnight(knight.id)" src="../assets/delete-24px.svg"
+                    matTooltip="Remover este knight" alt="Remover Knigt">
             </div>
         </mat-card-header>
         <mat-card-content>
@@ -27,8 +37,8 @@
                         <span class="bold">Ataque</span> <span class="attack-info">{{ knight?.ataque }}</span>
                     </div>
                     <div>
-                        <span class="bold">XP</span> <span class="exp-info"><progress [matTooltip]="knight?.exp" [value]='knight?.exp'
-                                max="3000"></progress></span>
+                        <span class="bold">XP</span> <span class="exp-info"><progress [matTooltip]="knight?.exp"
+                                [value]='knight?.exp' max="3000"></progress></span>
                     </div>
                 </div>
             </div>
