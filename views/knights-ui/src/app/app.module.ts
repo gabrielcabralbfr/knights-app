@@ -21,6 +21,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 import { CreateWeaponComponent } from './create-weapon/create-weapon.component';
 import { ListKnightComponent } from './list-knight/list-knight.component';
@@ -51,7 +52,8 @@ import { ListKnightComponent } from './list-knight/list-knight.component';
     MatProgressSpinnerModule,
     MatTooltipModule,
     MatSnackBarModule,
-    MatStepperModule
+    MatStepperModule,
+    MatSlideToggleModule
 
   ],
   providers: [MatDatepickerModule],

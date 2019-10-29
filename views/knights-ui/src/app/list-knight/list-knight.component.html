@@ -1,21 +1,25 @@
+<mat-slide-toggle *ngIf="knightsList.length > 0" (change)="handleSlideChange($event)" class="example-margin" color="primary" checked="false">
+    Mostrar somente heróis
+</mat-slide-toggle>
 <div *ngIf="!isLoading">
     <mat-card *ngFor="let knight of knightsList" class="knight-card">
         <mat-card-header class="card-header">
             <mat-card-title class="bold">
                 {{ knight?.nome }}
                 <span *ngIf="knight.isEditing">
-                    ( <input (keyup)="updateInputLength($event)" id="editInput" [value]="knight.apelido" type="text" [size]="inputSize + 1">)
+                    ( <input (keyup)="updateInputLength($event)" id="editInput" [value]="knight.apelido" type="text"
+                        [size]="inputSize + 1">)
                     <button mat-raised-button color="accent" (click)="finishEdition(knight)">OK</button>
                 </span>
-                <span *ngIf="!knight.isEditing">({{ knight?.apelido}})</span>
+                <span class="nickname" *ngIf="!knight.isEditing">({{ knight?.apelido}})</span>
 
             </mat-card-title>
             <mat-card-subtitle>{{ knight?.atributo }}</mat-card-subtitle>
             <div class="actions">
                 <img (click)="editKnight(knight)" src="../assets/create-24px.svg" matTooltip="Editar este knight"
                     alt="Editar Knight">
-                <img (click)="deleteKnight(knight.id)" src="../assets/delete-24px.svg"
-                    matTooltip="Remover este knight" alt="Remover Knigt">
+                <img (click)="deleteKnight(knight.id)" src="../assets/delete-24px.svg" matTooltip="Remover este knight"
+                    alt="Remover Knigt">
             </div>
         </mat-card-header>
         <mat-card-content>
@@ -51,5 +55,5 @@
 </div>
 
 <div *ngIf="knightsList.length === 0 && !isLoading" class="no-result">
-    <p>Desculpe, nenhum knight encontrado! Você pode cadastrar um <a [routerLink]='["/create/knight"]'> aqui</a></p>
+    <p>Desculpe, nenhum knight encontrado! Você pode cadastrar um <a [routerLink]='["/create/knight"]'> aqui</a>.</p>
 </div>

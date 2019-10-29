@@ -35,7 +35,7 @@ export class ListKnightComponent implements OnInit {
     knightToBeDeleted = knightToBeDeleted[0]
     this.knightService.deleteKnight(id).subscribe(response => {
       this.knightsList.splice(this.knightsList.indexOf(knightToBeDeleted), 1)
-      this._snackBar.open("Knight deletado com sucesso", 'OK', { duration: 2500 })
+      this._snackBar.open("Knight deletado com sucesso! Agora ele se tornou um herói", 'OK', { duration: 2500 })
     }, error => {
       this._snackBar.open("Náo foi possivel deleter o knight", 'OK', { duration: 2500 })
     })
@@ -43,11 +43,17 @@ export class ListKnightComponent implements OnInit {
 
   editKnight(knight: Knight): void {
     let index = this.knightsList.indexOf(knight);
-    this.knightsList[index].isEditing = this.knightsList[index].isEditing ? false : true
+
+    if (this.knightsList[index].isEditing) {
+      this.knightsList[index].isEditing = false
+    } else {
+      this.knightsList[index].isEditing = true
+      setTimeout(() => {
+        document.getElementById('editInput').focus()
+      }, 150);
+    }
+
     this.inputSize = this.knightsList[index].apelido.length + 1
-    setTimeout(() => {
-      document.getElementById('editInput').focus()
-    }, 350);
   }
 
   finishEdition(knight: Knight): void {
@@ -64,5 +70,15 @@ export class ListKnightComponent implements OnInit {
 
   updateInputLength(event: any) {
     this.inputSize = event.target.value.length
+  }
+
+  handleSlideChange(event: any) {
+    this.isLoading = true
+    let queryString = ''
+    if (event.checked) queryString = `?filter=heroes`
+    this.knightService.getAllKnights(queryString).subscribe(response => {
+      this.knightsList = response
+      this.isLoading = false
+    })
   }
 }
