@@ -7,6 +7,7 @@ export class Knight {
     public weapons: Array<Weapon>;
     public attributes: Object;
     public keyAttribute: string;
+    public id: string
 
     constructor(name: string) {
         this.name = name
