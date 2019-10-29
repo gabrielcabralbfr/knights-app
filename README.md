@@ -18,7 +18,7 @@ docker-compose start
 ```
 
 2. With NPM
-On root directory
+- On root directory
 ```bash
 npm install
 npm start
@@ -32,5 +32,11 @@ npm start
 ```
 
 ## Getting Started
-- To see API documentation, access '/api-docs'
-- To access the platform UI, go to: http://localhost:4200
+- To see API documentation, access 
+```
+http://localhost:3000/api-docs
+```
+- To access the platform UI, go to: 
+```
+http://localhost:4200
+```
