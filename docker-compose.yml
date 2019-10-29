@@ -12,7 +12,7 @@ services:
             - '3000:3000'
         # depends_on: 
         #     - database
-    # client:
-    #     build: ./views/knights-ui
-    #     ports:
-    #         - '8000:4200'
+    client:
+        build: ./views/knights-ui
+        ports:
+            - '8000:80'
