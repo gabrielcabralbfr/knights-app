@@ -1,0 +1,93 @@
+.knight-card {
+    margin: 30px auto;
+    max-width: 550px;
+    border: 1px solid #e1e1e1;
+    box-shadow: 2px 2px 5px #333;
+    width: 84%;
+}
+
+.mat-slide-toggle {
+    margin: 3% 0px 0px 5%;
+    font-size: 16px;
+}
+
+.attr-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 10px 0px
+}
+
+mat-card-header {
+    justify-content: space-between;
+}
+
+mat-card-subtitle {
+    font-size: 12px;
+}
+
+img {
+    cursor: pointer;
+}
+
+.attr-container span {
+    display: flex;
+    place-items: center;
+}
+
+.sword-icon {
+    width: 15px;
+    height: auto;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+.loading-container {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.attr-container div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    width: 70%;
+}
+
+.no-result {
+    display: flex;
+    justify-content: center;
+}
+
+.no-result p {
+    font-size: 16px;
+    text-align: center;
+}
+
+.mat-raised-button {
+    min-width: 50px;
+    font-size: 10px;
+    line-height: 18px;
+    padding: 0;
+}
+
+input {
+    text-align: center;
+    border: none;
+    border-bottom: 1px solid #d6d6d6;
+    padding-bottom: 10px;
+    width: auto;
+    font-size: inherit;
+}
+
+input:focus {
+    outline: none;
+}
+
+.nickname {
+    font-weight: normal;
+}

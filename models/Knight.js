@@ -34,6 +34,7 @@ var knightSchema = new Schema({
 
 knightSchema.virtual("age")
     .get(function () {
+        if (!this.birthday) return 0
         // Calculating age based on birthday
         let today = new Date()
 
@@ -60,7 +61,7 @@ knightSchema.virtual("attack")
 
         // Getting equipped weeapon, since filter method returns an Array, pop method is needed
         const equippedWeapon = this.weapons.filter(weapon => weapon.equipped).pop()
-
+        if (!equippedWeapon) return 0
         const attack = 10 + mod(keyAttributeValue) + equippedWeapon.mod
         return attack
     })

@@ -1,0 +1,24 @@
+:host {
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.toolbar {
+    height: 60px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    background-color: #000;
+    color: white;
+    font-weight: 600;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    margin: 0 5px;
+}

@@ -7,15 +7,17 @@ module.exports = {
             if (err) return res.send(err)
 
             let knightsList = []
-
             knights.map(knight => {
                 let tempKnight = {
-                    Nome: knight.name,
-                    Idade: knight.age,
-                    Armas: knight.weapons.length,
-                    Atributo: knight.keyAttribute,
-                    Ataque: knight.attack,
-                    Exp: knight.exp
+                    nome: knight.name,
+                    idade: knight.age,
+                    armas: knight.weapons.length,
+                    atributo: knight.keyAttribute,
+                    ataque: knight.attack,
+                    exp: knight.exp,
+                    apelido: knight.nickname,
+                    id: knight.id,
+                    isHero: knight.hallOfHeroes
                 }
                 knightsList.push(tempKnight)
             })

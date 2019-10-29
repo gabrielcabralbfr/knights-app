@@ -1,0 +1,29 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.mat-checkbox-label {
+    margin-left: 10px
+}
+.mat-checkbox-inner-container {
+    margin-right: auto !important;
+}
+
+.mat-horizontal-content-container {
+    padding: 24px !important;
+}
+
+@media only screen and (max-width: 600px) {
+    mat-step-header.mat-horizontal-stepper-header {
+        flex-direction: column;
+        place-content: space-evenly;
+    }
+}

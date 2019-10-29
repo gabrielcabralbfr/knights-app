@@ -1,0 +1,48 @@
+mat-form-field, mat-slider {
+    margin: 15px 15px 15px 0;
+}
+
+.slider-container {
+    position: relative;
+    padding: 12px 12px 12px 0;
+}
+
+.slider-container mat-label {
+    position: absolute;
+}
+
+.mat-slider-horizontal {
+    height: unset;
+}
+
+.weapon-creation {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+.category-title {
+    font-weight: bolder;
+    display: flex;
+    place-items: center;
+}
+
+mat-icon {
+    margin-right: 5px;
+}
+mat-checkbox {
+    display: flex;
+    place-items: center;
+    padding: 12px;
+}
+@media only screen and (max-width: 600px) {
+    .weapon-creation  {
+        grid-template-columns: auto;
+    }
+
+    .mat-slider-horizontal {
+        min-width: 100px;
+    }
+    mat-horizontal-stepper {
+        width: 100%;
+    }
+}
