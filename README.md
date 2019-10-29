@@ -2,8 +2,9 @@
 
 ## Dependencies
 
-1. Install [Docker](https://docs.docker.com/)
-1. Install [Node and NPM](https://nodejs.org/en/)
+1. [Docker](https://docs.docker.com/)
+2. [Node and NPM](https://nodejs.org/en/)
+3. [Angular Cli](https://www.npmjs.com/package/@angular/cli) 
 
 
 ## Running the application
@@ -29,3 +30,7 @@ npm install
 npm i -g @angular/cli
 npm start
 ```
+
+## Getting Started
+- To see API documentation, access '/api-docs'
+- To access the platform UI, go to: http://localhost:4200
