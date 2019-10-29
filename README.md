@@ -19,10 +19,13 @@ docker-compose start
 2. With NPM
 On root directory
 ```bash
+npm install
 npm start
 ```
 - Open another terminal
-        ```bash
-        cd views/knights-ui
-        npm start
-        ```
+```bash
+cd views/knights-ui
+npm install
+npm i -g @angular/cli
+npm start
+```
