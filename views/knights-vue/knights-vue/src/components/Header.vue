@@ -7,13 +7,13 @@
 
       <v-btn icon>
         <router-link to="/knight/list">
-          <v-icon>mdi-view-list</v-icon>
+          <v-icon color="#fff">mdi-view-list</v-icon>
         </router-link>
       </v-btn>
 
       <v-btn icon>
         <router-link to="/knight/create">
-          <v-icon>mdi-plus-thick</v-icon>
+          <v-icon color="#fff">mdi-plus-thick</v-icon>
         </router-link>
       </v-btn>
     </v-app-bar>
