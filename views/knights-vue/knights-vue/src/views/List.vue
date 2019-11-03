@@ -64,6 +64,7 @@ export default {
         )
         .then(response => {
           console.log(response);
+          response.data.map(knight => knight.isBeeingEdited = false)
           this.knightsList = response.data;
         })
         .catch(error => {

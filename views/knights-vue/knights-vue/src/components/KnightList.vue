@@ -3,10 +3,15 @@
     <div v-bind:key="knight.id" v-for="knight in knights">
       <v-card class="card" :raised="true">
         <v-card-title class="d-flex justify-space-between">
-          {{ knight.nome }} ({{ knight.apelido }})
+          <span v-if="!knight.isBeeingEdited">{{ knight.nome }} ({{ knight.apelido }})</span>
+          <span v-if="knight.isBeeingEdited">
+            {{ knight.nome }}
+            <input id="nickname-edit" type="text" v-model="knight.apelido" />
+            <v-btn text color="primary" @click="editKnight(knight)">OK</v-btn>
+          </span>
           <span>
-          <v-icon color="#000">mdi-pencil</v-icon>
-          <v-icon color="#000">mdi-delete</v-icon>
+            <v-icon @click="toggleKnightEdit(knight)" color="#000">mdi-pencil</v-icon>
+            <v-icon @click="deleteKnight" color="#000">mdi-delete</v-icon>
           </span>
         </v-card-title>
         <v-card-subtitle>{{ knight.atributo }}</v-card-subtitle>
@@ -27,14 +32,42 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "HelloWorld",
+  name: "KnightList",
   props: {
     knights: Array,
     isLoading: Boolean
   },
   data() {
-    return {};
+    return {
+    };
+  },
+  methods: {
+    editKnight: function(knight) {
+      axios
+        .put(`http://localhost:3000/knights/${knight.id}`, {
+          nickname: knight.apelido
+        })
+        .then(response => {
+          console.log(response);
+          knight.isBeeingEdited = false
+        })
+        .catch(err => console.log(err))
+    },
+    toggleKnightEdit: function(knight) {
+      knight.isBeeingEdited = !knight.isBeeingEdited;
+      // Esperando para dar foco no input por conta do delay até que ele esteja na tela
+      
+      setTimeout(() => {
+        knight.isBeeingEdited
+          ? document.getElementById("nickname-edit").focus()
+          : null;
+      }, 100);
+    },
+    deleteKnight: function() {
+      console.log("DELETE");
+    }
   }
 };
 </script>
@@ -69,5 +102,15 @@ span.text {
   display: grid;
   grid-column-gap: 10%;
   grid-template-columns: auto auto;
+}
+
+#nickname-edit:focus {
+  outline: none;
+}
+#nickname-edit {
+  border-bottom: 1px solid #000;
+  padding: 0 10px;
+  max-width: 100px;
+  width: 40%;
 }
 </style>

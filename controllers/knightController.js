@@ -1,7 +1,7 @@
 const { Knight } = require("../models/Knight")
 module.exports = {
     getAll: ({ res, query }) => {
-        let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query 
+        let queryString = query.filter == 'heroes' ? { hallOfHeroes: true } : query
         query.hallOfHeroes = false
         Knight.find(queryString, function (err, knights) {
             if (err) return res.send(err)
@@ -45,10 +45,14 @@ module.exports = {
         })
     },
     updateKnight: ({ params, res, body }) => {
-        if (!body.nickname) res.status(400).send({ error: "Missing nickname property" })
-        Knight.findOneAndUpdate({ _id: params.knightId }, { nickname: body.nickname }, function (err, knight) {
-            if (err) return res.status(400).send(err)
-            res.send(knight)
-        })
+        if (!body.nickname) return res.status(400).send({ error: "Missing nickname property" })
+        try {
+            Knight.findOneAndUpdate({ _id: params.knightId }, { nickname: body.nickname }, function (err, knight) {
+                if (err) return res.status(400).send(err)
+                return res.send(knight)
+            })
+        } catch (error) {
+            return res.send(error)
+        }
     }
 }
