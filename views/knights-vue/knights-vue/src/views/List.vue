@@ -1,7 +1,9 @@
 <template>
   <div class="home">
-    <KnightsList v-bind:knights="lista"/>
-    <v-card v-if="isLoading" class="card" :raised="true" :loading="isLoading">
+    <v-switch color="#000" v-model="showHeroes" class="ma-4" label="Mostrar somente heróis"></v-switch>
+    <KnightsList v-bind:knights="knightsList" />
+
+    <v-card v-if="isLoading" class="card" :raised="true" :loading="true">
       <v-card-title>
         <span class="placeholder title"></span>
       </v-card-title>
@@ -36,29 +38,41 @@ export default {
   },
   data() {
     return {
-      lista: [],
-      isLoading: true
+      knightsList: [],
+      isLoading: true,
+      showHeroes: false
     };
   },
-  updated() {
-    console.log("CALLED:");
+  watch: {
+    showHeroes(newValue) {
+      this.getKnights(newValue);
+    }
   },
   mounted() {
+    // Forçando espera de 1s
     setTimeout(() => {
+      this.getKnights(false);
+    }, 1000);
+  },
+  methods: {
+    getKnights: function(showOnlyHeroes) {
       axios
-        .get("http://localhost:3000/knights")
+        .get(
+          `http://localhost:3000/knights${
+            showOnlyHeroes ? `?filter=heroes` : ""
+          }`
+        )
         .then(response => {
           console.log(response);
-          this.lista = response.data;
+          this.knightsList = response.data;
         })
         .catch(error => {
           console.log(error);
         })
         .finally(() => (this.isLoading = false));
-    }, 2000);
+    }
   }
 };
-// this. lista =  [{id: 1, name: 'Gabriel'}]
 </script>
 
 <style lang="css" scoped>
@@ -72,6 +86,9 @@ span.subtitle-placeholder {
   border-radius: 4px;
   margin: 3px 0;
 }
+.knight-container {
+  animation: shine 1s infinite;
+}
 span.subtitle {
   width: 100px;
 }
@@ -80,6 +97,20 @@ span.text {
 }
 .card {
   max-width: 500px;
+  width: 85%;
   margin: 10px auto;
+}
+
+.grid-container {
+  display: grid;
+  grid-column-gap: 10%;
+  grid-template-columns: auto auto;
+}
+
+@keyframes shine {
+  to {
+    background-position: 0 0, 100% 0, /* move highlight to right */ 120px 0,
+      120px 40px, 120px 80px, 120px 120px;
+  }
 }
 </style>

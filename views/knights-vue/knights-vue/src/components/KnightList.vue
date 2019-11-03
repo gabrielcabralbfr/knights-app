@@ -2,27 +2,20 @@
   <div>
     <div v-bind:key="knight.id" v-for="knight in knights">
       <v-card class="card" :raised="true">
-        <v-card-title>
-          <span v-if="isLoading" class="placeholder title"></span>
+        <v-card-title class="d-flex justify-space-between">
           {{ knight.nome }} ({{ knight.apelido }})
+          <span>
+          <v-icon color="#000">mdi-pencil</v-icon>
+          <v-icon color="#000">mdi-delete</v-icon>
+          </span>
         </v-card-title>
-
-        <v-card-subtitle>
-          <span v-if="isLoading" class="placeholder subtitle"></span>
-          {{ knight.atributo }}
-        </v-card-subtitle>
+        <v-card-subtitle>{{ knight.atributo }}</v-card-subtitle>
         <v-card-text>
+          <v-icon color="#fff">mdi-view-list</v-icon>
           <div class="knight-container">
-            <p class="knight-basic-info"></p>
-            <div v-if="isLoading" class="knight attr grid-container">
-              <span v-if="isLoading" class="attr grid-item placeholder text"></span>
-              <span v-if="isLoading" class="attr grid-item placeholder text"></span>
-              <span v-if="isLoading" class="attr grid-item placeholder text"></span>
-              <span v-if="isLoading" class="attr grid-item placeholder text"></span>
-            </div>
             <div v-if="!isLoading" class="knight attr grid-container">
               <span class="attr grid-item">Idade: {{ knight.idade }}</span>
-              <span class="attr grid-item">Qtd. Armas{{ knight.armas }}</span>
+              <span class="attr grid-item">Qtd. Armas: {{ knight.armas }}</span>
               <span class="attr grid-item">Exp: {{ knight.exp }}</span>
               <span class="attr grid-item">Ataque: {{ knight.ataque }}</span>
             </div>
@@ -39,6 +32,9 @@ export default {
   props: {
     knights: Array,
     isLoading: Boolean
+  },
+  data() {
+    return {};
   }
 };
 </script>
@@ -64,13 +60,14 @@ span.text {
 .card {
   max-width: 500px;
   margin: 10px auto;
+  width: 85%;
 }
-
+.v-card__title {
+  font-size: 1rem;
+}
 .grid-container {
   display: grid;
-  grid-column-gap: 150px;
-  grid-row-gap: 10px;
+  grid-column-gap: 10%;
   grid-template-columns: auto auto;
-  /* grid-gap: 50px 100px; */
 }
 </style>
