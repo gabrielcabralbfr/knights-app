@@ -7,7 +7,8 @@
           <span v-if="knight.isBeeingEdited">
             {{ knight.nome }}
             <input id="nickname-edit" type="text" v-model="knight.apelido" />
-            <v-btn text color="primary" @click="editKnight(knight)">OK</v-btn>
+            <v-btn text color="#000" @click="editKnight(knight)">OK</v-btn>
+            <v-icon color="#00ff38" v-if="knight.editedSuccessfully">mdi-progress-check</v-icon>
           </span>
           <span>
             <v-icon @click="toggleKnightEdit(knight)" color="#000">mdi-pencil</v-icon>
@@ -18,11 +19,26 @@
         <v-card-text>
           <v-icon color="#fff">mdi-view-list</v-icon>
           <div class="knight-container">
-            <div v-if="!isLoading" class="knight attr grid-container">
+            <div class="knight attr grid-container">
               <span class="attr grid-item">Idade: {{ knight.idade }}</span>
-              <span class="attr grid-item">Qtd. Armas: {{ knight.armas }}</span>
-              <span class="attr grid-item">Exp: {{ knight.exp }}</span>
-              <span class="attr grid-item">Ataque: {{ knight.ataque }}</span>
+              <span class="attr grid-item">
+                Qtd. Armas:
+                <span v-bind:key="n" v-for="n in knight.armas">
+                  <v-icon color="black" size=15>mdi-sword-cross</v-icon>
+                </span>
+              </span>
+              <span class="attr grid-item d-flex flex-row align-center">
+                Exp:
+                <v-progress-linear class="pl-2"
+                  color="black"
+                  :value="(knight.exp/5000) * 100"
+                ></v-progress-linear>
+              </span>
+              <span class="attr grid-item">
+                Ataque:
+                <v-progress-circular :value="knight.ataque" color="black">{{ knight.ataque }}</v-progress-circular>
+                <!-- {{ knight.ataque }} -->
+              </span>
             </div>
           </div>
         </v-card-text>
@@ -36,12 +52,7 @@ import axios from "axios";
 export default {
   name: "KnightList",
   props: {
-    knights: Array,
-    isLoading: Boolean
-  },
-  data() {
-    return {
-    };
+    knights: Array
   },
   methods: {
     editKnight: function(knight) {
@@ -49,20 +60,25 @@ export default {
         .put(`http://localhost:3000/knights/${knight.id}`, {
           nickname: knight.apelido
         })
-        .then(response => {
-          console.log(response);
-          knight.isBeeingEdited = false
+        .then(() => {
+          // Flag para exibição do icone de sucesso
+          knight.editedSuccessfully = true;
+
+          // Aguardando 1s para remover icones
+          setTimeout(() => {
+            knight.isBeeingEdited = false;
+            knight.editedSuccessfully = false;
+          }, 1500);
         })
-        .catch(err => console.log(err))
+        .catch(err => console.log(err));
     },
     toggleKnightEdit: function(knight) {
       knight.isBeeingEdited = !knight.isBeeingEdited;
+
       // Esperando para dar foco no input por conta do delay até que ele esteja na tela
-      
       setTimeout(() => {
-        knight.isBeeingEdited
-          ? document.getElementById("nickname-edit").focus()
-          : null;
+        if (knight.isBeeingEdited)
+          document.getElementById("nickname-edit").focus();
       }, 100);
     },
     deleteKnight: function() {
