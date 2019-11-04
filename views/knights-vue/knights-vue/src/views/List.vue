@@ -45,6 +45,8 @@ export default {
   },
   watch: {
     showHeroes(newValue) {
+      this.isLoading = true;
+      this.knightsList = []
       this.getKnights(newValue);
     }
   },
@@ -107,7 +109,7 @@ span.text {
 
 .grid-container {
   display: grid;
-  grid-column-gap: 10%;
+  grid-column-gap: 30%;
   grid-template-columns: auto auto;
 }
 
