@@ -110,7 +110,11 @@ export default {
             knight.editedSuccessfully = false;
           }, 1500);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.callSnackbar("Não foi possível editar este Knight. Tente novamente mais tarde");
+
+          console.log(err);
+        });
     },
     toggleKnightEdit: function(knight) {
       knight.isBeeingEdited = !knight.isBeeingEdited;
@@ -123,7 +127,7 @@ export default {
     },
     deleteKnight: function(knight) {
       if (knight.isHero) {
-        this.callSnackbar("Um herói não pode ser deletado.");
+        this.callSnackbar("Este Knight já é um herói");
         return;
       }
       axios
