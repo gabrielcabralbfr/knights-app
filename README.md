@@ -33,5 +33,5 @@ npm start
 ```
 
 ## Getting Started
-- To see API documentation, access '/api-docs'
-- To access the platform UI, go to: http://localhost:8080
+- See API [documentation](http://localhost:3000/api-docs)
+- Access the [platform UI](http://localhost:8080)
