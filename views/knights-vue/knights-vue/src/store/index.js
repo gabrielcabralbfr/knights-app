@@ -16,11 +16,17 @@ export default new Vuex.Store({
   mutations: {
     SET_NEW_WEAPON(state, newWeapon) {
       return state.weapons.push(newWeapon)
+    },
+    REMOVE_WEAPON(state, weaponToBeDeleted) {
+      return  state.weapons = state.weapons.filter(weapon => weapon.id !== weaponToBeDeleted.id)
     }
   },
   actions: {
     AddWeapon(context, newWeapon) {
       return context.commit("SET_NEW_WEAPON", newWeapon)
+    },
+    RemoveWeapon(context, weaponToBeDeleted) {
+      return context.commit("REMOVE_WEAPON", weaponToBeDeleted)
     }
   },
   getters: {

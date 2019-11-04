@@ -44,11 +44,18 @@
           <v-stepper-content step="2">
             <div ref="weaponContainer" class="w-form-container">
               <div v-bind:key="weapon.id" v-for="(weapon, index) in weapons">
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-icon class="float-right" @click="removeWeapon(weapon)" v-on="on">mdi-close</v-icon>
+                  </template>
+                  <span>Remover arma</span>
+                </v-tooltip>
+
                 <WeaponForm :weapon="weapon" v-model="weapon[index]" />
               </div>
             </div>
             <v-btn
-              class="d-block center mx-auto mt-5"
+              class="d-block center mx-auto mt-5 mb-5"
               color="default"
               @click="addWeapon"
             >Adicionar nova arma</v-btn>
@@ -173,6 +180,9 @@ export default {
         attribute: "",
         equipped: false
       });
+    },
+    removeWeapon(weapon) {
+      store.dispatch("RemoveWeapon", weapon);
     }
   },
   computed: {
