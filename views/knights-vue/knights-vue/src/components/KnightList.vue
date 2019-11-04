@@ -12,7 +12,7 @@
           </span>
           <span>
             <v-icon @click="toggleKnightEdit(knight)" color="#000">mdi-pencil</v-icon>
-            <v-icon @click="deleteKnight" color="#000">mdi-delete</v-icon>
+            <v-icon @click="deleteKnight(knight.id)" color="#000">mdi-delete</v-icon>
           </span>
         </v-card-title>
         <v-card-subtitle>{{ knight.atributo }}</v-card-subtitle>
@@ -24,20 +24,16 @@
               <span class="attr grid-item">
                 Qtd. Armas:
                 <span v-bind:key="n" v-for="n in knight.armas">
-                  <v-icon color="black" size=15>mdi-sword-cross</v-icon>
+                  <v-icon color="black" size="15">mdi-sword-cross</v-icon>
                 </span>
               </span>
               <span class="attr grid-item d-flex flex-row align-center">
                 Exp:
-                <v-progress-linear class="pl-2"
-                  color="black"
-                  :value="(knight.exp/5000) * 100"
-                ></v-progress-linear>
+                <v-progress-linear class="pl-2" color="black" :value="(knight.exp/5000) * 100"></v-progress-linear>
               </span>
               <span class="attr grid-item">
                 Ataque:
                 <v-progress-circular :value="knight.ataque" color="black">{{ knight.ataque }}</v-progress-circular>
-                <!-- {{ knight.ataque }} -->
               </span>
             </div>
           </div>
@@ -81,8 +77,15 @@ export default {
           document.getElementById("nickname-edit").focus();
       }, 100);
     },
-    deleteKnight: function() {
-      console.log("DELETE");
+    deleteKnight: function(id) {
+      axios
+        .delete(`http://localhost:3000/knights/${id}`)
+        .then((response) => {
+          console.log(response);
+          
+          this.knights.splice(this.knights.indexOf({id: id}), 1)
+        })
+        .catch(err => console.log(err));
     }
   }
 };
@@ -116,7 +119,7 @@ span.text {
 }
 .grid-container {
   display: grid;
-  grid-column-gap: 10%;
+  grid-column-gap: 30%;
   grid-template-columns: auto auto;
 }
 
