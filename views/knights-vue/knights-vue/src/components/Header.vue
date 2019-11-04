@@ -8,8 +8,8 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <router-link to="/knight/list">
-            <v-btn icon>
-              <v-icon v-on="on" color="#fff">mdi-view-list</v-icon>
+            <v-btn v-on="on" icon>
+              <v-icon color="#fff">mdi-view-list</v-icon>
             </v-btn>
           </router-link>
         </template>
@@ -18,8 +18,8 @@
       <v-tooltip bottom>
         <template v-slot:activator="{ on }">
           <router-link to="/knight/create">
-            <v-btn icon>
-              <v-icon v-on="on" color="#fff">mdi-plus-thick</v-icon>
+            <v-btn v-on="on" icon>
+              <v-icon color="#fff">mdi-plus-thick</v-icon>
             </v-btn>
           </router-link>
         </template>

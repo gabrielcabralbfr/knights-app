@@ -159,12 +159,14 @@ export default {
         .post("http://localhost:3000/knights", this.knight)
         .then(response => {
           this.callSnackbar("Knight criado com sucesso!");
-          this.$refs.knightForm.reset()
-          this.step = 1
+          this.$refs.knightForm.reset();
+          this.step = 1;
           console.log(response);
         })
         .catch(err => {
-          this.callSnackbar("Não foi possível criar o Knight. Tente novamente mais tarde");
+          this.callSnackbar(
+            "Não foi possível criar o Knight. Tente novamente mais tarde"
+          );
           console.log(err);
         });
     },
@@ -199,5 +201,8 @@ form {
 }
 .v-stepper:not(.v-stepper--vertical) .v-stepper__label {
   display: block !important;
+}
+.v-stepper__step {
+  cursor: pointer;
 }
 </style>
