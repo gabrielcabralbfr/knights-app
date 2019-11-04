@@ -1,6 +1,6 @@
 <template>
   <v-row class="d-flex justify-center mb-5" align="center">
-    <v-form ref="form" v-model="valid" :lazy-validation="false">
+    <v-form ref="knightForm" v-model="valid" :lazy-validation="false">
       <v-stepper v-model="step">
         <v-stepper-header>
           <v-stepper-step @click="step = 1" :complete="step > 1" step="1">Guerreiro</v-stepper-step>
@@ -78,7 +78,7 @@
                 ></v-slider>
               </div>
               <div>
-                <v-subheader class="pl-0 pb-3 d-block">Constituiçã0</v-subheader>
+                <v-subheader class="pl-0 pb-3 d-block">Constituição</v-subheader>
                 <v-slider
                   v-model="knight.attributes.constituition"
                   thumb-label="always"
@@ -114,6 +114,10 @@
         </v-stepper-items>
       </v-stepper>
     </v-form>
+    <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
+      {{ snackbar.text }}
+      <v-btn color="primary" text @click="snackbar.show = false">FECHAR</v-btn>
+    </v-snackbar>
   </v-row>
 </template>
 
@@ -124,7 +128,7 @@ export default {
   data() {
     return {
       valid: false,
-      step: 0,
+      step: 1,
       knight: {
         name: "",
         nickname: "",
@@ -139,6 +143,11 @@ export default {
         mod: 0,
         attribute: "",
         equipped: false
+      },
+      snackbar: {
+        show: false,
+        text: "",
+        timeout: 4000
       }
     };
   },
@@ -146,11 +155,24 @@ export default {
     submitForm() {
       this.knight.weapons.push(this.weapon);
       console.log(this.knight);
-      axios.post("http://localhost:3000/knights", this.knight)
-      .then(response => console.log(response))
-      .catch(err => console.log(err))
+      axios
+        .post("http://localhost:3000/knights", this.knight)
+        .then(response => {
+          this.callSnackbar("Knight criado com sucesso!");
+          this.$refs.knightForm.reset()
+          this.step = 1
+          console.log(response);
+        })
+        .catch(err => {
+          this.callSnackbar("Não foi possível criar o Knight. Tente novamente mais tarde");
+          console.log(err);
+        });
     },
-    validate() {}
+    callSnackbar(text, timeout = this.snackbar.timeout) {
+      this.snackbar.text = text;
+      this.snackbar.timeout = timeout;
+      this.snackbar.show = true;
+    }
   }
 };
 </script>

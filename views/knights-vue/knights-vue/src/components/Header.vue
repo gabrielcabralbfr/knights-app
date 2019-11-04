@@ -5,17 +5,26 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <router-link to="/knight/list">
-          <v-icon color="#fff">mdi-view-list</v-icon>
-        </router-link>
-      </v-btn>
-
-      <v-btn icon>
-        <router-link to="/knight/create">
-          <v-icon color="#fff">mdi-plus-thick</v-icon>
-        </router-link>
-      </v-btn>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon>
+            <router-link to="/knight/list">
+              <v-icon v-on="on" color="#fff">mdi-view-list</v-icon>
+            </router-link>
+          </v-btn>
+        </template>
+        <span>Lista de Knights</span>
+      </v-tooltip>
+      <v-tooltip bottom>
+        <template v-slot:activator="{ on }">
+          <v-btn icon>
+            <router-link to="/knight/create">
+              <v-icon v-on="on" color="#fff">mdi-plus-thick</v-icon>
+            </router-link>
+          </v-btn>
+        </template>
+        <span>Criar um Knight</span>
+      </v-tooltip>
     </v-app-bar>
   </div>
 </template>

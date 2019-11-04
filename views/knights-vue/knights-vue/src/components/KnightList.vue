@@ -11,8 +11,19 @@
             <v-icon color="#00ff38" v-if="knight.editedSuccessfully">mdi-progress-check</v-icon>
           </span>
           <span>
-            <v-icon @click="toggleKnightEdit(knight)" color="#000">mdi-pencil</v-icon>
-            <v-icon @click="deleteKnight(knight.id)" color="#000">mdi-delete</v-icon>
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-icon v-on="on" @click="toggleKnightEdit(knight)" color="#000">mdi-pencil</v-icon>
+              </template>
+              <span>Editar apelido</span>
+            </v-tooltip>
+
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on }">
+                <v-icon v-on="on" @click="deleteKnight(knight)" color="#000">mdi-delete</v-icon>
+              </template>
+              <span>Tornar um herói</span>
+            </v-tooltip>
           </span>
         </v-card-title>
         <v-card-subtitle>{{ knight.atributo }}</v-card-subtitle>
@@ -29,17 +40,29 @@
               </span>
               <span class="attr grid-item d-flex flex-row align-center">
                 Exp:
-                <v-progress-linear class="pl-2" color="black" :value="(knight.exp/5000) * 100"></v-progress-linear>
+                <v-progress-linear
+                  class="pl-2"
+                  color="black"
+                  :value="(knight.exp/maxExpNumber) * 100"
+                ></v-progress-linear>
               </span>
               <span class="attr grid-item">
                 Ataque:
-                <v-progress-circular :value="knight.ataque" color="black">{{ knight.ataque }}</v-progress-circular>
+                <v-progress-circular
+                  :value="(knight.ataque / maxAtackNumber) * 100"
+                  size="35"
+                  color="black"
+                >{{ knight.ataque }}</v-progress-circular>
               </span>
             </div>
           </div>
         </v-card-text>
       </v-card>
     </div>
+    <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
+      {{ snackbar.text }}
+      <v-btn color="primary" text @click="snackbar.show = false">Fechar</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -49,6 +72,17 @@ export default {
   name: "KnightList",
   props: {
     knights: Array
+  },
+  data: function() {
+    return {
+      snackbar: {
+        show: false,
+        text: "",
+        timeout: 4000
+      },
+      maxAtackNumber: 200,
+      maxExpNumber: 5000
+    };
   },
   methods: {
     editKnight: function(knight) {
@@ -77,15 +111,30 @@ export default {
           document.getElementById("nickname-edit").focus();
       }, 100);
     },
-    deleteKnight: function(id) {
+    deleteKnight: function(knight) {
+      if (knight.isHero) {
+        this.callSnackbar("Um herói não pode ser deletado.");
+        return;
+      }
       axios
-        .delete(`http://localhost:3000/knights/${id}`)
-        .then((response) => {
+        .delete(`http://localhost:3000/knights/${knight.id}`)
+        .then(response => {
           console.log(response);
-          
-          this.knights.splice(this.knights.indexOf({id: id}), 1)
+
+          this.callSnackbar("Knight deletado com sucesso", 3000);
+          this.knights.splice(this.knights.indexOf({ id: knight.id }), 1);
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+          this.callSnackbar(
+            "Não foi possivel deletar este Knight. Tente novamente mais tarde"
+          );
+          console.log(err);
+        });
+    },
+    callSnackbar(text, timeout = this.snackbar.timeout) {
+      this.snackbar.text = text;
+      this.snackbar.timeout = timeout;
+      this.snackbar.show = true;
     }
   }
 };
