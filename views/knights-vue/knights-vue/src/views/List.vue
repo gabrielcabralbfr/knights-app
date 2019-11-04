@@ -27,6 +27,10 @@
         </div>
       </v-card-text>
     </v-card>
+    <v-snackbar v-model="snackbar.show" :timeout="snackbar.timeout">
+      {{ snackbar.text }}
+      <v-btn color="primary" text @click="snackbar.show = false">Fechar</v-btn>
+    </v-snackbar>
   </div>
 </template>
 
@@ -44,7 +48,12 @@ export default {
     return {
       knightsList: [],
       isLoading: true,
-      showHeroes: false
+      showHeroes: false,
+      snackbar: {
+        show: false,
+        text: "",
+        timeout: 4000
+      }
     };
   },
   watch: {
@@ -69,7 +78,6 @@ export default {
           }`
         )
         .then(response => {
-          console.log(response);
           if (!response.data) return;
           response.data.map(knight => {
             knight.isBeeingEdited = false;
@@ -77,10 +85,18 @@ export default {
           });
           this.knightsList = response.data;
         })
-        .catch(error => {
-          console.log(error);
+        .catch(() => {
+          this.callSnackbar(
+            "Erro ao obter listagem de knights. Cheque sua conexão com a internet",
+            7000
+          );
         })
         .finally(() => (this.isLoading = false));
+    },
+    callSnackbar(text, timeout = this.snackbar.timeout) {
+      this.snackbar.text = text;
+      this.snackbar.timeout = timeout;
+      this.snackbar.show = true;
     }
   }
 };

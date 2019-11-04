@@ -110,10 +110,8 @@ export default {
             knight.editedSuccessfully = false;
           }, 1500);
         })
-        .catch(err => {
+        .catch(() => {
           this.callSnackbar("Não foi possível editar este Knight. Tente novamente mais tarde");
-
-          console.log(err);
         });
     },
     toggleKnightEdit: function(knight) {
@@ -132,17 +130,14 @@ export default {
       }
       axios
         .delete(`http://localhost:3000/knights/${knight.id}`)
-        .then(response => {
-          console.log(response);
-
+        .then(() => {
           this.callSnackbar("Knight deletado com sucesso", 3000);
           this.knights.splice(this.knights.indexOf({ id: knight.id }), 1);
         })
-        .catch(err => {
+        .catch(() => {
           this.callSnackbar(
             "Não foi possivel deletar este Knight. Tente novamente mais tarde"
           );
-          console.log(err);
         });
     },
     callSnackbar(text, timeout = this.snackbar.timeout) {

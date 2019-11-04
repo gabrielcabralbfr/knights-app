@@ -149,17 +149,15 @@ export default {
       this.knight.weapons = this.weapons;
       axios
         .post("http://localhost:3000/knights", this.knight)
-        .then(response => {
+        .then(() => {
           this.callSnackbar("Knight criado com sucesso!");
           this.$refs.knightForm.reset();
           this.step = 1;
-          console.log(response);
         })
-        .catch(err => {
+        .catch(() => {
           this.callSnackbar(
             "Não foi possível criar o Knight. Tente novamente mais tarde"
           );
-          console.log(err);
         });
     },
     callSnackbar(text, timeout = this.snackbar.timeout) {
