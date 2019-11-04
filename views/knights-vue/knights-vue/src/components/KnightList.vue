@@ -31,20 +31,29 @@
           <v-icon color="#fff">mdi-view-list</v-icon>
           <div class="knight-container">
             <div class="knight attr grid-container">
-              <span class="attr grid-item">Idade: {{ knight.idade }}</span>
+              <span class="attr grid-item">
+                Idade:
+                <span class="ml-2">{{ knight.idade }}</span>
+              </span>
               <span class="attr grid-item">
                 Qtd. Armas:
-                <span v-bind:key="n" v-for="n in knight.armas">
+                <span class="ml-2" v-bind:key="n" v-for="n in knight.armas">
                   <v-icon color="black" size="15">mdi-sword-cross</v-icon>
                 </span>
               </span>
               <span class="attr grid-item d-flex flex-row align-center">
                 Exp:
-                <v-progress-linear
-                  class="pl-2"
-                  color="black"
-                  :value="(knight.exp/maxExpNumber) * 100"
-                ></v-progress-linear>
+                <v-tooltip bottom>
+                  <template v-slot:activator="{ on }">
+                    <v-progress-linear
+                      class="pl-2"
+                      color="black"
+                      v-on="on"
+                      :value="(knight.exp/maxExpNumber) * 100"
+                    ></v-progress-linear>
+                  </template>
+                  <span>{{knight.exp}}</span>
+                </v-tooltip>
               </span>
               <span class="attr grid-item">
                 Ataque:
@@ -52,6 +61,7 @@
                   :value="(knight.ataque / maxAtackNumber) * 100"
                   size="35"
                   color="black"
+                  class="ml-2"
                 >{{ knight.ataque }}</v-progress-circular>
               </span>
             </div>
