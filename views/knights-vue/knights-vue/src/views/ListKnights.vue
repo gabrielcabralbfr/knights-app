@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-switch color="#000" v-model="showHeroes" class="ma-4" label="Mostrar somente heróis"></v-switch>
-    <KnightsList v-bind:knights="knightsList" />
+    <KnightsCard v-bind:knights="knightsList" />
     <p v-if="!isLoading && knightsList.length < 1" class="text-center">
       Nenhum knight encontrado
       <v-icon color="#000">mdi-emoticon-sad-outline</v-icon>
@@ -36,13 +36,13 @@
 
 <script>
 // @ is an alias to /src
-import KnightsList from "@/components/KnightList.vue";
+import KnightsCard from "@/components/KnightsCard.vue";
 import axios from "axios";
 
 export default {
   name: "knightlist",
   components: {
-    KnightsList
+    KnightsCard
   },
   data() {
     return {
