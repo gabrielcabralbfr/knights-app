@@ -10,7 +10,7 @@
 ## Running the application
 
 1. With docker
-Run the following command to startup the application
+- Run the following command to startup the application
 
 ```bash
 docker-compose build
