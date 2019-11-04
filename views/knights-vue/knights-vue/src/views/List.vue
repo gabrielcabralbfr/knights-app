@@ -2,6 +2,10 @@
   <div class="home">
     <v-switch color="#000" v-model="showHeroes" class="ma-4" label="Mostrar somente heróis"></v-switch>
     <KnightsList v-bind:knights="knightsList" />
+    <p v-if="!isLoading && knightsList.length < 1" class="text-center">
+      Nenhum knight encontrado
+      <v-icon color="#000">mdi-emoticon-sad-outline</v-icon>
+    </p>
 
     <v-card v-if="isLoading" class="card" :raised="true" :loading="true">
       <v-card-title>
@@ -46,7 +50,7 @@ export default {
   watch: {
     showHeroes(newValue) {
       this.isLoading = true;
-      this.knightsList = []
+      this.knightsList = [];
       this.getKnights(newValue);
     }
   },
@@ -66,6 +70,7 @@ export default {
         )
         .then(response => {
           console.log(response);
+          if (!response.data) return;
           response.data.map(knight => {
             knight.isBeeingEdited = false;
             knight.editedSuccessfully = false;
