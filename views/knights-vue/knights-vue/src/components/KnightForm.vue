@@ -38,32 +38,26 @@
               <p class="birthday pb-3 text-center">Data de Nascimento do Guerreiro</p>
               <v-date-picker class="datepicker" v-model="knight.birthday" required></v-date-picker>
             </div>
-            <v-btn color="default" class="float-right" @click="step = 2">Avançar</v-btn>
+            <v-btn outlined color="default" class="float-right" @click="step = 2">Avançar</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-text-field
-              v-model="weapon.name"
-              :rules="[v => !!v || 'Nome da arma é obrigatório']"
-              label="Nome da Arma"
-              required
-            ></v-text-field>
-            <v-text-field
-              v-model="weapon.attribute"
-              :rules="[v => !!v || 'Atributo da arma é obrigatório']"
-              label="Atributo da Arma"
-              required
-            ></v-text-field>
-            <v-switch color="primary" v-model="weapon.equipped" :label="`Equipada`"></v-switch>
-            <v-subheader class="pl-0 pb-3">Mod</v-subheader>
-            <v-slider v-model="weapon.mod" thumb-label="always"></v-slider>
-            <v-btn class="float-right" color="default" @click="step = 3">Avançar</v-btn>
+            <div ref="weaponContainer" class="w-form-container">
+              <div v-bind:key="weapon.id" v-for="(weapon, index) in weapons">
+                <WeaponForm :weapon="weapon" v-model="weapon[index]" />
+              </div>
+            </div>
+            <v-btn
+              class="d-block center mx-auto mt-5"
+              color="default"
+              @click="addWeapon"
+            >Adicionar nova arma</v-btn>
+            <v-btn outlined class="float-right raised" color="default" @click="step = 3">Avançar</v-btn>
 
             <v-btn text @click="step = 1">Voltar</v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <!-- <v-card class="mb-12" color="grey lighten-1" height="200px"></v-card> -->
             <div class="mt-4 grid-container">
               <div>
                 <v-subheader class="pl-0 pb-3 d-block">Força</v-subheader>
@@ -123,8 +117,13 @@
 
 <script>
 import axios from "axios";
+import WeaponForm from "@/components/WeaponForm.vue";
+import store from "@/store";
 export default {
   name: "KnightForm",
+  components: {
+    WeaponForm
+  },
   data() {
     return {
       valid: false,
@@ -138,12 +137,6 @@ export default {
         keyAttribute: "",
         id: ""
       },
-      weapon: {
-        name: "",
-        mod: 0,
-        attribute: "",
-        equipped: false
-      },
       snackbar: {
         show: false,
         text: "",
@@ -153,8 +146,7 @@ export default {
   },
   methods: {
     submitForm() {
-      this.knight.weapons.push(this.weapon);
-      console.log(this.knight);
+      this.knight.weapons = this.weapons;
       axios
         .post("http://localhost:3000/knights", this.knight)
         .then(response => {
@@ -174,6 +166,20 @@ export default {
       this.snackbar.text = text;
       this.snackbar.timeout = timeout;
       this.snackbar.show = true;
+    },
+    addWeapon() {
+      store.dispatch("AddWeapon", {
+        id: this.weapons.length + 1,
+        name: "",
+        mod: 0,
+        attribute: "",
+        equipped: false
+      });
+    }
+  },
+  computed: {
+    weapons() {
+      return store.getters.getWeapons;
     }
   }
 };
