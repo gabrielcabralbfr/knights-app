@@ -13,6 +13,6 @@ services:
         # depends_on: 
         #     - database
     client:
-        build: ./views/knights-ui
+        build: ./views/knights-vue/knights-vue
         ports:
-            - '8000:80'
+            - '8080:8080'

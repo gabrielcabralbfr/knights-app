@@ -8,7 +8,7 @@ var indexRouter = require('./routes/index');
 var knightsRouter = require('./routes/knights');
 
 var mongoose = require('mongoose');
-
+mongoose.set('useFindAndModify', false);
 var app = express();
 app.use(cors())
 const swaggerUi = require('swagger-ui-express');
