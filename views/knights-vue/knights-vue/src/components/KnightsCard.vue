@@ -120,14 +120,13 @@ export default {
         });
     },
     toggleKnightEdit: function(knight) {
-      knight.ataque = knight.finalAtack;
-      // knight.isBeeingEdited = !knight.isBeeingEdited;
+      knight.isBeeingEdited = !knight.isBeeingEdited;
 
-      // // Esperando para dar foco no input por conta do delay até que ele esteja na tela
-      // setTimeout(() => {
-      //   if (knight.isBeeingEdited)
-      //     document.getElementById("nickname-edit").focus();
-      // }, 100);
+      // Esperando para dar foco no input por conta do delay até que ele esteja na tela
+      setTimeout(() => {
+        if (knight.isBeeingEdited)
+          document.getElementById("nickname-edit").focus();
+      }, 100);
     },
     deleteKnight: function(knight) {
       if (knight.isHero) {
