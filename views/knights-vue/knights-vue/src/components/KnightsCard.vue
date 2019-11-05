@@ -37,9 +37,11 @@
               </span>
               <span class="attr grid-item">
                 Qtd. Armas:
-                <span class="ml-2" v-bind:key="n" v-for="n in knight.armas">
-                  <v-icon color="black" size="15">mdi-sword-cross</v-icon>
-                </span>
+                <v-fade-transition :group="true" leave-absolute>
+                  <span class="ml-2" v-bind:key="n" v-for="n in knight.armas">
+                    <v-icon color="black" size="15">mdi-sword-cross</v-icon>
+                  </span>
+                </v-fade-transition>
               </span>
               <span class="attr grid-item d-flex flex-row align-center">
                 Exp:
@@ -59,7 +61,8 @@
                 Ataque:
                 <v-progress-circular
                   :value="knight.ataque > 1 ? (knight.ataque / maxAtackNumber) * 100 : 0"
-                  size="35"
+                  rotate="85"
+                  size="40"
                   color="black"
                   class="ml-2"
                 >{{ knight.ataque }}</v-progress-circular>
@@ -150,12 +153,12 @@ export default {
     },
     callAtackFill() {
       this.knights.map(knight => {
-        return knight.ataque = knight.finalAtack;
+        return (knight.ataque = knight.finalAtack);
       });
     },
     callExpFill() {
       this.knights.map(knight => {
-      return knight.exp = knight.finalExp;
+        return (knight.exp = knight.finalExp);
       });
     }
   },
@@ -200,7 +203,7 @@ span.text {
 .grid-container {
   display: grid;
   grid-column-gap: 30%;
-  grid-template-columns: auto auto;
+  grid-template-columns: 24% 58%;
 }
 
 #nickname-edit:focus {

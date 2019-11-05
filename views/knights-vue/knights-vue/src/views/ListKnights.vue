@@ -80,12 +80,37 @@ export default {
         .then(response => {
           if (!response.data) return;
           response.data.map(knight => {
+            knight.finalAtack = knight.ataque;
+            knight.finalExp = knight.exp;
+            knight.ataque = 0;
+            knight.exp = 0;
+            knight.totalWeapons = knight.armas;
+            knight.armas = 0;
+            knight.finalIdade = knight.idade;
+            knight.idade = 0;
+
             knight.isBeeingEdited = false;
-            knight.finalAtack = knight.ataque
-            knight.finalExp = knight.exp
-            knight.ataque = 0
-            knight.exp = 0
             knight.editedSuccessfully = false;
+
+            // ANIMANDO IDADE
+            setInterval(() => {
+              if (knight.finalIdade > knight.idade) knight.idade += 1;
+            }, 1); // ANIMANDO IDADE
+
+            // ANIMANDO ATAQUE
+            setTimeout(() => {
+              knight.exp = knight.finalExp;
+
+              // ANIMANDO EXP
+              setTimeout(() => {
+                knight.ataque = knight.finalAtack;
+
+                // ANIMANDO ARMAS
+                setInterval(() => {
+                  if (knight.totalWeapons > knight.armas) knight.armas += 1;
+                }, 300); // ANIMANDO ARMAS
+              }, 400); // ANIMANDO EXP
+            }, 1100); // ANIMANDO ATAQUE
           });
           this.knightsList = response.data;
         })
