@@ -81,6 +81,10 @@ export default {
           if (!response.data) return;
           response.data.map(knight => {
             knight.isBeeingEdited = false;
+            knight.finalAtack = knight.ataque
+            knight.finalExp = knight.exp
+            knight.ataque = 0
+            knight.exp = 0
             knight.editedSuccessfully = false;
           });
           this.knightsList = response.data;

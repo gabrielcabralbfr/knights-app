@@ -49,7 +49,7 @@
                       class="pl-2"
                       color="black"
                       v-on="on"
-                      :value="(knight.exp/maxExpNumber) * 100"
+                      :value="knight.exp > 1 ? (knight.exp/maxExpNumber) * 100 : 0"
                     ></v-progress-linear>
                   </template>
                   <span>{{knight.exp}}</span>
@@ -58,7 +58,7 @@
               <span class="attr grid-item">
                 Ataque:
                 <v-progress-circular
-                  :value="(knight.ataque / maxAtackNumber) * 100"
+                  :value="knight.ataque > 1 ? (knight.ataque / maxAtackNumber) * 100 : 0"
                   size="35"
                   color="black"
                   class="ml-2"
@@ -111,17 +111,20 @@ export default {
           }, 1500);
         })
         .catch(() => {
-          this.callSnackbar("Não foi possível editar este Knight. Tente novamente mais tarde");
+          this.callSnackbar(
+            "Não foi possível editar este Knight. Tente novamente mais tarde"
+          );
         });
     },
     toggleKnightEdit: function(knight) {
-      knight.isBeeingEdited = !knight.isBeeingEdited;
+      knight.ataque = knight.finalAtack;
+      // knight.isBeeingEdited = !knight.isBeeingEdited;
 
-      // Esperando para dar foco no input por conta do delay até que ele esteja na tela
-      setTimeout(() => {
-        if (knight.isBeeingEdited)
-          document.getElementById("nickname-edit").focus();
-      }, 100);
+      // // Esperando para dar foco no input por conta do delay até que ele esteja na tela
+      // setTimeout(() => {
+      //   if (knight.isBeeingEdited)
+      //     document.getElementById("nickname-edit").focus();
+      // }, 100);
     },
     deleteKnight: function(knight) {
       if (knight.isHero) {
@@ -144,7 +147,26 @@ export default {
       this.snackbar.text = text;
       this.snackbar.timeout = timeout;
       this.snackbar.show = true;
+    },
+    callAtackFill() {
+      this.knights.map(knight => {
+        return knight.ataque = knight.finalAtack;
+      });
+    },
+    callExpFill() {
+      this.knights.map(knight => {
+      return knight.exp = knight.finalExp;
+      });
     }
+  },
+  mounted: function() {
+    setTimeout(() => {
+      this.callExpFill();
+    }, 1800);
+
+    setTimeout(() => {
+      this.callAtackFill();
+    }, 2000);
   }
 };
 </script>
