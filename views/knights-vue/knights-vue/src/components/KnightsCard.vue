@@ -33,7 +33,7 @@
             <div class="knight attr grid-container">
               <span class="attr grid-item">
                 Idade:
-                <span class="ml-2">{{ knight.idade }}</span>
+                <span class="ml-2 font-weight-regular" v-bind:class="{ counting: knight.isCounting }">{{ knight.idade }}</span>
               </span>
               <span class="attr grid-item">
                 Qtd. Armas:
@@ -150,26 +150,7 @@ export default {
       this.snackbar.text = text;
       this.snackbar.timeout = timeout;
       this.snackbar.show = true;
-    },
-    callAtackFill() {
-      this.knights.map(knight => {
-        return (knight.ataque = knight.finalAtack);
-      });
-    },
-    callExpFill() {
-      this.knights.map(knight => {
-        return (knight.exp = knight.finalExp);
-      });
     }
-  },
-  mounted: function() {
-    setTimeout(() => {
-      this.callExpFill();
-    }, 1800);
-
-    setTimeout(() => {
-      this.callAtackFill();
-    }, 2000);
   }
 };
 </script>
@@ -215,4 +196,8 @@ span.text {
   max-width: 100px;
   width: 40%;
 }
+.attr:first-child {
+  font-weight: bold;
+}
+
 </style>

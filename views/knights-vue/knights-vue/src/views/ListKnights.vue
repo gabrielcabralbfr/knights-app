@@ -94,8 +94,10 @@ export default {
 
             // ANIMANDO IDADE
             setInterval(() => {
+              knight.isCounting = true;
               if (knight.finalIdade > knight.idade) knight.idade += 1;
-            }, 1); // ANIMANDO IDADE
+              else knight.isCounting = false;
+            }, 0); // ANIMANDO IDADE
 
             // ANIMANDO ATAQUE
             setTimeout(() => {
