@@ -33,13 +33,15 @@
             <div class="knight attr grid-container">
               <span class="attr grid-item">
                 Idade:
-                <span class="ml-2">{{ knight.idade }}</span>
+                <span class="ml-2 font-weight-regular" v-bind:class="{ counting: knight.isCounting }">{{ knight.idade }}</span>
               </span>
               <span class="attr grid-item">
                 Qtd. Armas:
-                <span class="ml-2" v-bind:key="n" v-for="n in knight.armas">
-                  <v-icon color="black" size="15">mdi-sword-cross</v-icon>
-                </span>
+                <v-fade-transition :group="true" leave-absolute>
+                  <span class="ml-2" v-bind:key="n" v-for="n in knight.armas">
+                    <v-icon color="black" size="15">mdi-sword-cross</v-icon>
+                  </span>
+                </v-fade-transition>
               </span>
               <span class="attr grid-item d-flex flex-row align-center">
                 Exp:
@@ -49,7 +51,7 @@
                       class="pl-2"
                       color="black"
                       v-on="on"
-                      :value="(knight.exp/maxExpNumber) * 100"
+                      :value="knight.exp > 1 ? (knight.exp/maxExpNumber) * 100 : 0"
                     ></v-progress-linear>
                   </template>
                   <span>{{knight.exp}}</span>
@@ -58,8 +60,9 @@
               <span class="attr grid-item">
                 Ataque:
                 <v-progress-circular
-                  :value="(knight.ataque / maxAtackNumber) * 100"
-                  size="35"
+                  :value="knight.ataque > 1 ? (knight.ataque / maxAtackNumber) * 100 : 0"
+                  rotate="85"
+                  size="40"
                   color="black"
                   class="ml-2"
                 >{{ knight.ataque }}</v-progress-circular>
@@ -111,17 +114,20 @@ export default {
           }, 1500);
         })
         .catch(() => {
-          this.callSnackbar("Não foi possível editar este Knight. Tente novamente mais tarde");
+          this.callSnackbar(
+            "Não foi possível editar este Knight. Tente novamente mais tarde"
+          );
         });
     },
     toggleKnightEdit: function(knight) {
-      knight.isBeeingEdited = !knight.isBeeingEdited;
+      knight.ataque = knight.finalAtack;
+      // knight.isBeeingEdited = !knight.isBeeingEdited;
 
-      // Esperando para dar foco no input por conta do delay até que ele esteja na tela
-      setTimeout(() => {
-        if (knight.isBeeingEdited)
-          document.getElementById("nickname-edit").focus();
-      }, 100);
+      // // Esperando para dar foco no input por conta do delay até que ele esteja na tela
+      // setTimeout(() => {
+      //   if (knight.isBeeingEdited)
+      //     document.getElementById("nickname-edit").focus();
+      // }, 100);
     },
     deleteKnight: function(knight) {
       if (knight.isHero) {
@@ -178,7 +184,7 @@ span.text {
 .grid-container {
   display: grid;
   grid-column-gap: 30%;
-  grid-template-columns: auto auto;
+  grid-template-columns: 24% 58%;
 }
 
 #nickname-edit:focus {
@@ -190,4 +196,8 @@ span.text {
   max-width: 100px;
   width: 40%;
 }
+.attr:first-child {
+  font-weight: bold;
+}
+
 </style>
