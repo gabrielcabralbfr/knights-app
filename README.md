@@ -10,7 +10,7 @@
 ## Running the application
 
 1. With docker
-Run the following command to startup the application
+- Run the following command to startup the application
 
 ```bash
 docker-compose build
@@ -19,7 +19,7 @@ docker-compose start
 ```
 
 2. With NPM
-On root directory
+- On root directory
 ```bash
 npm install
 npm start
