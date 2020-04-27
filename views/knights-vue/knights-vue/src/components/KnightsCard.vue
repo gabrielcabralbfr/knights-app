@@ -3,7 +3,7 @@
     <div v-bind:key="knight.id" v-for="knight in knights">
       <v-card class="card" :raised="true">
         <v-card-title class="d-flex justify-space-between">
-          <span v-if="!knight.isBeeingEdited">{{ knight.nome }} ({{ knight.apelido }})</span>
+          <span @click="toggleKnightEdit(knight)" v-if="!knight.isBeeingEdited">{{ knight.nome }} ({{ knight.apelido }})</span>
           <span v-if="knight.isBeeingEdited">
             {{ knight.nome }}
             <input id="nickname-edit" type="text" v-model="knight.apelido" />
